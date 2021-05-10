@@ -454,7 +454,7 @@
 							<a class="nav-link" data-toggle="tab" href="#vendorSearchTab">Vendor</a>
 						</li>
 					</ul>
-  
+	  
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div id="itemSearchTab" class="container-fluid tab-pane active">
@@ -549,11 +549,11 @@
 							  <div class="form-row">
 								  <div class="form-group col-md-3">
 									<label for="purchaseReportStartDate">Start Date</label>
-									<input type="text" class="form-control datepicker" id="purchaseReportStartDate" value="2018-05-24" name="purchaseReportStartDate" readonly>
+									<input type="text" class="form-control datepicker" id="purchaseReportStartDate" value="2021-03-28" name="purchaseReportStartDate" readonly>
 								  </div>
 								  <div class="form-group col-md-3">
 									<label for="purchaseReportEndDate">End Date</label>
-									<input type="text" class="form-control datepicker" id="purchaseReportEndDate" value="2018-05-24" name="purchaseReportEndDate" readonly>
+									<input type="text" class="form-control datepicker" id="purchaseReportEndDate" value="2021-03-28" name="purchaseReportEndDate" readonly>
 								  </div>
 							  </div>
 							  <button type="button" id="showPurchaseReport" class="btn btn-dark">Show Report</button>

@@ -1,7 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
-	
+echo "Hii";	
 	$uPrice = 0;
 	$qty = 0;
 	$totalPrice = 0;
