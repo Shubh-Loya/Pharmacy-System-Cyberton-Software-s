@@ -111,6 +111,7 @@
         </div>
         <div class="col-3">
           <div class="card text-center bg-danger">
+	   <a href="histogram.php">
             <div class="card-body box4">
                 <h3 class="card-text"><i class="fas fa-chart-bar"></i> </h3>
                 <h5>Analysis</h5>
@@ -167,8 +168,8 @@
       Supplementary Details
       </div>
       <div class="card-body">
-    <div class="card-header">Expired Stock</div>
-    <div class="card-header"><a href="items.php">Add Item</div> 
+    <div class="card-header"><a href="expiry.php">Expiring Stock</div>
+    <div class="card-header"><a href="items.php">Add Product</div> 
     <div class="card-header"><a href="customers.php">Add Customer</a></div>
     <div class="card-header"><a href="vendors.php">Add Vendor</a></div>
   </div>

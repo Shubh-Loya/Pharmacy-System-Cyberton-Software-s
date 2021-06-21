@@ -10,15 +10,30 @@
 		
 		$itemNumber = htmlentities($_POST['itemDetailsItemNumber']);
 		$itemName = htmlentities($_POST['itemDetailsItemName']);
-		$discount = htmlentities($_POST['itemDetailsDiscount']);
+		// $discount = htmlentities($_POST['itemDetailsDiscount']);
 		$quantity = htmlentities($_POST['itemDetailsQuantity']);
 		$unitPrice = htmlentities($_POST['itemDetailsUnitPrice']);
 		$status = htmlentities($_POST['itemDetailsStatus']);
 		$description = htmlentities($_POST['itemDetailsDescription']);
+		$category = htmlentities($_POST['itemDetailsCategory']);
+		$MRP = htmlentities($_POST['itemDetailsMRP']);
+		$GST = htmlentities($_POST['itemDetailsGST']);
 		
 		// Check if mandatory fields are not empty
-		if(!empty($itemNumber) && !empty($itemName) && isset($quantity) && isset($unitPrice)){
+		if(!empty($itemNumber) && !empty($itemName) && isset($quantity) && isset($unitPrice) && isset($category) && isset($MRP) && isset($GST)){
+
+			// Check if mrp is empty
+				if($MRP == ''){ 
+					echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter MRP.</div>';
+					exit();
+				}
 			
+			// Check if gst is empty
+				if($GST == ''){ 
+					echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter GST %.</div>';
+					exit();
+				}
+
 			// Sanitize item number
 			$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
 			
@@ -40,14 +55,14 @@
 				exit();
 			}
 			
-			// Validate discount only if it's provided
-			if(!empty($discount)){
-				if(filter_var($discount, FILTER_VALIDATE_FLOAT) === false){
-					// Discount is not a valid floating point number
-					echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter a valid discount amount</div>';
-					exit();
-				}
-			}
+			// // Validate discount only if it's provided
+			// if(!empty($discount)){
+			// 	if(filter_var($discount, FILTER_VALIDATE_FLOAT) === false){
+			// 		// Discount is not a valid floating point number
+			// 		echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter a valid discount amount</div>';
+			// 		exit();
+			// 	}
+			// }
 			
 			// Create image folder for uploading images
 			$itemImageFolder = $baseImageFolder . $itemNumber;
@@ -70,15 +85,15 @@
 			} else {
 				// Item does not exist, therefore, you can add it to DB as a new item
 				// Start the insert process
-				$insertItemSql = 'INSERT INTO item(itemNumber, itemName, discount, stock, unitPrice, status, description) VALUES(:itemNumber, :itemName, :discount, :stock, :unitPrice, :status, :description)';
+				$insertItemSql = 'INSERT INTO item(itemNumber, itemName, stock, unitPrice, status, description, category, MRP, GST) VALUES(:itemNumber, :itemName, :stock, :unitPrice, :status, :description, :category, :MRP, :GST)';
 				$insertItemStatement = $conn->prepare($insertItemSql);
-				$insertItemStatement->execute(['itemNumber' => $itemNumber, 'itemName' => $itemName, 'discount' => $discount, 'stock' => $quantity, 'unitPrice' => $unitPrice, 'status' => $status, 'description' => $description]);
+				$insertItemStatement->execute(['itemNumber' => $itemNumber, 'itemName' => $itemName, 'stock' => $quantity, 'unitPrice' => $unitPrice, 'status' => $status, 'description' => $description, 'category' => $category, 'MRP' => $MRP, 'GST' => $GST]);
 				echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Product added to database.</div>';
 				exit();
 			}
 
 		} else {
-			// One or more mandatory fields are empty. Therefore, display a the error message
+			// One or more mandatory fields are empty. Therefore, display the error message
 			echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter all fields marked with a (*)</div>';
 			exit();
 		}

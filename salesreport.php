@@ -23,11 +23,11 @@
 							  <div class="form-row">
 								  <div class="form-group col-md-3">
 									<label for="saleReportStartDate">Start Date</label>
-									<input type="text" class="form-control datepicker" id="saleReportStartDate" value="2021-03-28" name="saleReportStartDate" readonly>
+									<input type="text" class="form-control datepicker" id="saleReportStartDate" value="<?php echo date('Y-m-d');?>" name="saleReportStartDate" readonly>
 								  </div>
 								  <div class="form-group col-md-3">
 									<label for="saleReportEndDate">End Date</label>
-									<input type="text" class="form-control datepicker" id="saleReportEndDate" value="2021-03-28" name="saleReportEndDate" readonly>
+									<input type="text" class="form-control datepicker" id="saleReportEndDate" value="<?php echo date('Y-m-d');?>" name="saleReportEndDate" readonly>
 								  </div>
 							  </div>
 							  <button type="button" id="showSaleReport" class="btn btn-dark">Show Report</button>

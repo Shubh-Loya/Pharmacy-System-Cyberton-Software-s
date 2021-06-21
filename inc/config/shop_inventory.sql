@@ -30,6 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `customer` (
   `customerID` int(11) NOT NULL,
   `fullName` varchar(100) NOT NULL,
+  `drugNumber` varchar(100) NOT NULL,
+  `gstrNumber` varchar(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `mobile` int(11) NOT NULL,
   `phone2` int(11) DEFAULT NULL,
@@ -45,18 +47,18 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`customerID`, `fullName`, `email`, `mobile`, `phone2`, `address`, `address2`, `city`, `district`, `status`, `createdOn`) VALUES
-(4, 'Bill Gates', 'bill@microsoft.com', 993737, 772484884, '45, Palo Alto House, Marine Drive', 'South Carolina', 'Microsoft', 'Kurunegala', 'Active', '2021-03-28 15:14:02'),
-(14, 'Steve Jobs', 'sjobs@apple.com', 333829832, 0, '1st Floor, Apple House, ', 'Las Vegas Street', 'Las Vegas', 'Monaragala', 'Disabled', '2021-03-28 12:03:10'),
-(18, 'Asitha Silva', 'asitha@gmail.com', 777987654, 0, 'No. 3, Radcliff Avenue, School Lane', 'Kalutara South', 'Kalutara', 'Kalutara', 'Active', '2021-03-28 09:52:28'),
-(24, 'Sunil Perera', 'Sunil@gypsies.sound', 338393932, 413837293, '67/7, Perera Villa, Jayasekara Avenue', 'Mount Lavinia', 'Ratmalana', 'Colombo', 'Active', '2021-03-28 10:48:37'),
-(25, 'Theresa May', 'may34@uk.gov.com', 329393903, 777833737, '12, Downing Street', 'London', 'London', 'Matale', 'Active', '2021-03-28 02:28:07'),
-(26, 'Sachin Tendulkar', 'sachintendulkar@icc.com', 444958303, 84792838, '789-4, Apartment 3, ', 'Cric Complex', 'New Delhi', 'Puttalam', 'Active', '2021-03-28 02:28:38'),
-(38, 'Nuwan Perara', 'nuwan@yahoo.com', 839378202, 0, 'Nuwan Villa, Lower Street,', 'North Mulativu', 'Mullaitivu', 'Mullaitivu', 'Active', '2021-03-28 11:17:49'),
-(39, 'Amal Silverton', 'amals452@yahoo.com', 232345676, 0, 'Amal\'s House, Amal\'s Street,', 'Amal Road', 'Ambalangoda', 'Galle', 'Active', '2021-03-28 13:27:06'),
-(40, 'Andrew Symonds', 'symonds@cricket.au.com', 123, 0, '23, Oak View Avenue', 'Western Australia', 'Melbourne', 'Colombo', 'Disabled', '2021-03-28 01:20:23'),
-(41, 'Mark Taylor', '', 111, 0, '111', '', '', 'Colombo', 'Active', '2021-03-28 01:24:54'),
-(42, 'Nelson Mandela', 'sjobs@apple.com', 333829832, 0, '1st Floor, Apple House, ', 'Las Vegas Street', 'Las Vegas', 'Kalutara', 'Disabled', '2021-03-28 02:39:41');
+INSERT INTO `customer` (`customerID`, `fullName`, `drugNumber`, `gstrNumber`, `email`, `mobile`, `phone2`, `address`, `address2`, `city`, `district`, `status`, `createdOn`) VALUES
+(4, 'Bill Gates', 'AAA111', 'XYZ501', 'bill@microsoft.com', 993737, 772484884, '45, Palo Alto House, Marine Drive', 'South Carolina', 'Microsoft', 'Kurunegala', 'Active', '2021-03-28 15:14:02'),
+(14, 'Steve Jobs', 'AAA112', 'XYZ502', 'sjobs@apple.com', 333829832, 0, '1st Floor, Apple House, ', 'Las Vegas Street', 'Las Vegas', 'Monaragala', 'Disabled', '2021-03-28 12:03:10'),
+(18, 'Asitha Silva', 'AAA113', 'XYZ503', 'asitha@gmail.com', 777987654, 0, 'No. 3, Radcliff Avenue, School Lane', 'Kalutara South', 'Kalutara', 'Kalutara', 'Active', '2021-03-28 09:52:28'),
+(24, 'Sunil Perera', 'AAA114', 'XYZ504', 'Sunil@gypsies.sound', 338393932, 413837293, '67/7, Perera Villa, Jayasekara Avenue', 'Mount Lavinia', 'Ratmalana', 'Colombo', 'Active', '2021-03-28 10:48:37'),
+(25, 'Theresa May', 'AAA115', 'XYZ505', 'may34@uk.gov.com', 329393903, 777833737, '12, Downing Street', 'London', 'London', 'Matale', 'Active', '2021-03-28 02:28:07'),
+(26, 'Sachin Tendulkar', 'AAA116', 'XYZ506', 'sachintendulkar@icc.com', 444958303, 84792838, '789-4, Apartment 3, ', 'Cric Complex', 'New Delhi', 'Puttalam', 'Active', '2021-03-28 02:28:38'),
+(38, 'Nuwan Perara', 'AAA117', 'XYZ507', 'nuwan@yahoo.com', 839378202, 0, 'Nuwan Villa, Lower Street,', 'North Mulativu', 'Mullaitivu', 'Mullaitivu', 'Active', '2021-03-28 11:17:49'),
+(39, 'Amal Silverton', 'AAA118', 'XYZ508', 'amals452@yahoo.com', 232345676, 0, 'Amal\'s House, Amal\'s Street,', 'Amal Road', 'Ambalangoda', 'Galle', 'Active', '2021-03-28 13:27:06'),
+(40, 'Andrew Symonds', 'AAA119', 'XYZ509', 'symonds@cricket.au.com', 123, 0, '23, Oak View Avenue', 'Western Australia', 'Melbourne', 'Colombo', 'Disabled', '2021-03-28 01:20:23'),
+(41, 'Mark Taylor', 'AAA120', 'XYZ510', '', 111, 0, '111', '', '', 'Colombo', 'Active', '2021-03-28 01:24:54'),
+(42, 'Nelson Mandela', 'AAA121', 'XYZ511', 'sjobs@apple.com', 333829832, 0, '1st Floor, Apple House, ', 'Las Vegas Street', 'Las Vegas', 'Kalutara', 'Disabled', '2021-03-28 02:39:41');
 
 -- --------------------------------------------------------
 
@@ -68,8 +70,10 @@ CREATE TABLE `item` (
   `productID` int(11) NOT NULL,
   `itemNumber` varchar(255) NOT NULL,
   `itemName` varchar(255) NOT NULL,
-  `discount` float NOT NULL DEFAULT 0,
+  `category` varchar(255) NOT NULL DEFAULT 'Tablet',
   `stock` int(11) NOT NULL DEFAULT 0,
+  `MRP` float NOT NULL DEFAULT 0,
+  `GST` float NOT NULL DEFAULT 0,
   `unitPrice` float NOT NULL DEFAULT 0,
   `imageURL` varchar(255) NOT NULL DEFAULT 'imageNotAvailable.jpg',
   `status` varchar(255) NOT NULL DEFAULT 'Active',
@@ -80,16 +84,17 @@ CREATE TABLE `item` (
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`productID`, `itemNumber`, `itemName`, `discount`, `stock`, `unitPrice`, `imageURL`, `status`, `description`) VALUES
-(50, '1', 'Combiflam Tablet', 1, 400, 50, '1617441984_combiflam.jpg', 'Active', 'Painkiller'),
-(51, '2', 'Zeet Expectorant', 2, 80, 85, '1617442506_zeet.jpg', 'Active', 'Cough Syrup'),
-(52, '3', 'Procal Powder', 3, 20, 185, '1617442524_procal.jpg', 'Active', 'Protein Supplement'),
-(53, '4', 'Fabiflu 200 Tablet', 1, 40, 1400, '1617442541_fabiflu.jpg', 'Active', 'COVID Medicine'),
-(54, '5', 'Nupenta DSR Capsule', 2, 60, 55, '1617442557_nupenta.jpg', 'Active', 'Acidity Medicine'),
-(55, '6', 'Crocin Tablet', 2, 400, 35, '1617442571_crocin.jpg', 'Active', 'For Headache'),
-(56, '7', 'T-bact 5g Ointment', 2, 20, 75, '1617442587_t-bact.jpg', 'Active', 'Antibiotic Ointment'),
-(57, '8', 'Mosi Eye Drop', 2, 25, 65, '1617442603_mosi.jpg', 'Active', 'For Eye Strains'),
-(58, '9', 'Valparin 200 Tablet', 2, 35, 90, '1617442620_valparin.jpg', 'Active', 'Anti-epileptics');
+INSERT INTO `item` (`productID`, `itemNumber`, `itemName`, `category`, `stock`, `MRP`, `GST`, `unitPrice`, `imageURL`, `status`, `description`) VALUES
+
+(50, '1', 'Combiflam Tablet', 'Tablet', 400, 70, 12, 50, '1617441984_combiflam.jpg', 'Active', 'Painkiller'),
+(51, '2', 'Zeet Expectorant', 'Syrup', 80, 120, 8, 85, '1617442506_zeet.jpg', 'Active', 'Cough Syrup'),
+(52, '3', 'Procal Powder', 'Powder', 20, 250, 8, 185, '1617442524_procal.jpg', 'Active', 'Protein Supplement'),
+(53, '4', 'Fabiflu 200 Tablet', 'Tablet', 40, 2000, 12, 1400, '1617442541_fabiflu.jpg', 'Active', 'COVID Medicine'),
+(54, '5', 'Nupenta DSR Capsule', 'Capsule', 60, 85, 8, 55, '1617442557_nupenta.jpg', 'Active', 'Acidity Medicine'),
+(55, '6', 'Crocin Tablet', 'Tablet', 400, 50, 12, 35, '1617442571_crocin.jpg', 'Active', 'For Headache'),
+(56, '7', 'T-bact 5g Ointment', 'Ointment', 20, 105, 12, 75, '1617442587_t-bact.jpg', 'Active', 'Antibiotic Ointment'),
+(57, '8', 'Mosi Eye Drop', 'Drop', 25, 98, 8, 65, '1617442603_mosi.jpg', 'Active', 'For Eye Strains'),
+(58, '9', 'Valparin 200 Tablet', 'Tablet', 35, 138,12, 90, '1617442620_valparin.jpg', 'Active', 'Anti-epileptics');
 
 -- --------------------------------------------------------
 
@@ -103,8 +108,14 @@ CREATE TABLE `purchase` (
   `itemNumber` varchar(255) NOT NULL,
   `purchaseDate` date NOT NULL,
   `itemName` varchar(255) NOT NULL,
+  `batchNumber` varchar(255) NOT NULL,
+  `expiryDate` date NOT NULL,
+  `MRP` float NOT NULL DEFAULT 0,
   `unitPrice` float NOT NULL DEFAULT 0,
+  `discount` float NOT NULL DEFAULT 0,
+  `GST` float NOT NULL DEFAULT 0,
   `quantity` int(11) NOT NULL DEFAULT 0,
+  `totalPrice` int(11) NOT NULL,
   `vendorName` varchar(255) NOT NULL DEFAULT 'Test Vendor',
   `vendorID` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -113,16 +124,16 @@ CREATE TABLE `purchase` (
 -- Dumping data for table `purchase`
 --
 
-INSERT INTO `purchase` (`purchaseID`, `invoiceNumber`, `itemNumber`, `purchaseDate`, `itemName`, `unitPrice`, `quantity`, `vendorName`, `vendorID`) VALUES
-(53, 'ABC111', '1', '2021-03-28', 'Combiflam Tablet', 50, 50, 'Sanofi', 1),
-(54, 'ABC112', '2', '2021-03-28', 'Zeet Expectorant', 85, 20, 'FDC', 8),
-(55, 'ABC113', '3', '2021-03-28', 'Procal Powder', 185, 10, 'Glaxo SmithKline', 3),
-(56, 'ABC114', '4', '2021-03-20', 'Fabiflu 200 Tablet', 1400, 25, 'Glenmark', 2),
-(57, 'ABC115', '5', '2021-03-20', 'Nupenta DSR Capsule', 55, 20, 'Ranbaxy', 7),
-(58, 'ABC116', '6', '2021-03-20', 'Crocin Tablet', 35, 100, 'Cipla', 6),
-(59, 'ABC117', '7', '2021-03-20', 'T-bact 5g Ointment', 75, 10, 'Emcure', 4),
-(60, 'ABC118', '8', '2021-02-01', 'Mosi Eye Drop', 65, 5, 'FDC', 8),
-(61, 'ABC119', '9', '2021-02-01', 'Valparin 200 Tablet', 90, 15, 'Glenmark', 2);
+INSERT INTO `purchase` (`purchaseID`, `invoiceNumber`, `itemNumber`, `purchaseDate`, `itemName`, `batchNumber`, `expiryDate`, `MRP`, `unitPrice`, `discount`, `GST`, `quantity`, `totalPrice`, `vendorName`, `vendorID`) VALUES
+(53, 'ABC111', '1', '2021-03-28', 'Combiflam Tablet', 'ADEF1548', '2024-03-27', 70, 50, 1, 12, 50, 3000, 'Sanofi', 1),
+(54, 'ABC112', '2', '2021-03-28', 'Zeet Expectorant', 'HXSJ6456', '2024-03-27', 120, 85, 2, 8, 20, 300, 'FDC', 8),
+(55, 'ABC113', '3', '2021-03-28', 'Procal Powder', 'RETS8753', '2024-03-27', 250, 185, 3, 8,  10, 2250, 'Glaxo SmithKline', 3),
+(56, 'ABC114', '4', '2021-03-20', 'Fabiflu 200 Tablet', 'QBHI1597', '2024-03-19', 2000, 1400, 2, 12, 25, 38000, 'Glenmark', 2),
+(57, 'ABC115', '5', '2021-03-20', 'Nupenta DSR Capsule', 'WERS7543', '2024-03-19', 85, 55, 3, 8, 20, 1300, 'Ranbaxy', 7),
+(58, 'ABC116', '6', '2021-03-20', 'Crocin Tablet', 'YVBM5684', '2024-03-19', 50, 35, 1, 12, 100, 4200, 'Cipla', 6),
+(59, 'ABC117', '7', '2021-03-20', 'T-bact 5g Ointment', 'TSGJ4236', '2024-03-19', 105, 75, 2, 12, 10, 900, 'Emcure', 4),
+(60, 'ABC118', '8', '2021-02-01', 'Mosi Eye Drop', 'REGH4587', '2024-01-31', 98, 65, 2, 8, 5, 500, 'FDC', 8),
+(61, 'ABC119', '9', '2021-02-01', 'Valparin 200 Tablet', 'TVCZ8239', '2024-01-31', 138, 90, 3, 12, 15, 180, 'Glenmark', 2);
 
 -- --------------------------------------------------------
 
@@ -130,22 +141,22 @@ INSERT INTO `purchase` (`purchaseID`, `invoiceNumber`, `itemNumber`, `purchaseDa
 -- Table structure for table `purchasedata`
 --
 
-CREATE TABLE `purchasedata` (
-  `id` int(20) NOT NULL,
-  `product_name` varchar(30) NOT NULL,
-  `invoice_number` varchar(30) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `unit_price` int(11) NOT NULL,
-  `total_price` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- CREATE TABLE `purchasedata` (
+--   `id` int(20) NOT NULL,
+--   `product_name` varchar(30) NOT NULL,
+--   `invoice_number` varchar(30) NOT NULL,
+--   `quantity` int(11) NOT NULL,
+--   `unit_price` int(11) NOT NULL,
+--   `total_price` int(11) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `purchasedata`
 --
 
-INSERT INTO `purchasedata` (`id`, `product_name`, `invoice_number`, `quantity`, `unit_price`, `total_price`) VALUES
-(1, 'Combiflam Tablet', 'OPT567', 2, 50, 100),
-(2, 'Procal Powder', 'OPT567', 2, 185, 370);
+-- INSERT INTO `purchasedata` (`id`, `product_name`, `invoice_number`, `quantity`, `unit_price`, `total_price`) VALUES
+-- (1, 'Combiflam Tablet', 'OPT567', 2, 50, 100),
+-- (2, 'Procal Powder', 'OPT567', 2, 185, 370);
 
 -- --------------------------------------------------------
 
@@ -159,26 +170,31 @@ CREATE TABLE `sale` (
   `customerID` int(11) NOT NULL,
   `customerName` varchar(255) NOT NULL,
   `itemName` varchar(255) NOT NULL,
+  `batchNumber` varchar(255) NOT NULL,
+  `expiryDate` date NOT NULL,
+  `MRP` float NOT NULL DEFAULT 0,
   `saleDate` date NOT NULL,
   `discount` float NOT NULL DEFAULT 0,
   `quantity` int(11) NOT NULL DEFAULT 0,
-  `unitPrice` float(10,0) NOT NULL DEFAULT 0
+  `GST` float NOT NULL DEFAULT 0,
+  `unitPrice` float NOT NULL DEFAULT 0,
+  `totalPrice` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sale`
 --
 
-INSERT INTO `sale` (`saleID`, `itemNumber`, `customerID`, `customerName`, `itemName`, `saleDate`, `discount`, `quantity`, `unitPrice`) VALUES
-(18, '1', 14, 'Steve Jobs', 'Combiflam Tablet', '2021-02-01', 1, 50, 50),
-(19, '2', 18, 'Asitha Silva', 'Zeet Expectorant', '2021-02-01', 2, 10, 85),
-(20, '3', 41, 'Mark Taylor', 'Procal Powder', '2021-02-01', 3, 5, 185),
-(21, '4', 24, 'Sunil Perera', 'Fabiflu 200 Tablet', '2021-03-20', 1, 7, 1400),
-(22, '5', 25, 'Theresa May', 'Nupenta DSR Capsule', '2021-03-20', 2, 10, 55),
-(23, '6', 42, 'Nelson Mandela', 'Crocin Tablet', '2021-03-20', 2, 60, 35),
-(24, '7', 39, 'Amal Silverton', 'T-bact 5g Ointment', '2021-03-20', 2, 6, 75),
-(25, '8', 38, 'Nuwan Perara', 'Mosi Eye Drop', '2021-03-28', 2, 5, 65),
-(26, '9', 26, 'Sachin Tendulkar', 'Valparin 200 Tablet', '2021-03-28', 2, 5, 90);
+INSERT INTO `sale` (`saleID`, `itemNumber`, `customerID`, `customerName`, `itemName`, `batchNumber`, `expiryDate`, `MRP`, `saleDate`, `discount`, `quantity`, `GST`, `unitPrice`, `totalPrice`) VALUES
+(18, '1', 14, 'Steve Jobs', 'Combiflam Tablet', 'ADEF1548', '2024-03-27', 70, '2021-02-01', 1, 50, 12, 50, 2680),
+(19, '2', 18, 'Asitha Silva', 'Zeet Expectorant', 'HXSJ6456', '2024-03-27', 120, '2021-02-01', 2, 10, 8, 85, 970),
+(20, '3', 41, 'Mark Taylor', 'Procal Powder', 'RETS8753', '2024-03-27', 250, '2021-02-01', 3, 5, 8, 185, 655),
+(21, '4', 24, 'Sunil Perera', 'Fabiflu 200 Tablet', 'QBHI1597', '2024-03-19', 2000, '2021-03-20', 1, 7, 12, 1400, 10850),
+(22, '5', 25, 'Theresa May', 'Nupenta DSR Capsule', 'WERS7543', '2024-03-19', 85, '2021-03-20', 2, 10, 8, 55, 640),
+(23, '6', 42, 'Nelson Mandela', 'Crocin Tablet', 'YVBM5684', '2024-03-19', 50, '2021-03-20', 2, 60, 12, 35, 2300),
+(24, '7', 39, 'Amal Silverton', 'T-bact 5g Ointment', 'TSGJ4236', '2024-03-19', 105, '2021-03-20', 2, 6, 12, 75, 590),
+(25, '8', 38, 'Nuwan Perara', 'Mosi Eye Drop', 'REGH4587', '2024-01-31', 98, '2021-03-28', 2, 5, 12, 65, 368),
+(26, '9', 26, 'Sachin Tendulkar', 'Valparin 200 Tablet', 'TVCZ8239', '2024-01-31', 138, '2021-03-28', 2, 5, 8, 90, 490);
 
 -- --------------------------------------------------------
 
@@ -199,8 +215,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `fullName`, `username`, `password`, `status`) VALUES
-(5, 'Guest', 'guest', '81dc9bdb52d04dc20036dbd8313ed055', 'Active'),
-(6, 'user12345', 'user12345', '80ec08504af83331911f5882349af59d', 'Active');
+(1, 'Guest', 'guest', '084e0343a0486ff05530df6c705c8bb4', 'Active');
 
 -- --------------------------------------------------------
 
@@ -260,8 +275,8 @@ ALTER TABLE `purchase`
 --
 -- Indexes for table `purchasedata`
 --
-ALTER TABLE `purchasedata`
-  ADD PRIMARY KEY (`id`) USING BTREE;
+-- ALTER TABLE `purchasedata`
+--   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `sale`
@@ -306,8 +321,8 @@ ALTER TABLE `purchase`
 --
 -- AUTO_INCREMENT for table `purchasedata`
 --
-ALTER TABLE `purchasedata`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+-- ALTER TABLE `purchasedata`
+--   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sale`
@@ -319,7 +334,7 @@ ALTER TABLE `sale`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vendor`

@@ -34,7 +34,7 @@
 						</div>
 						  <div class="form-group col-md-3">
 							  <label for="saleDetailsSaleDate">Receipt Date<span class="requiredIcon">*</span></label>
-							  <input type="text" class="form-control datepicker" id="saleDetailsSaleDate" value="2021-03-28" name="saleDetailsSaleDate" readonly>
+							  <input type="text" class="form-control datepicker" id="saleDetailsSaleDate" value="<?php echo date('Y-m-d');?>" name="saleDetailsSaleDate" readonly>
 						  </div>
 					  </div>
 

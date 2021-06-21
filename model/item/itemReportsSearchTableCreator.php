@@ -12,7 +12,7 @@
 						<th>Product ID</th>
 						<th>Product Number</th>
 						<th>Product Name</th>
-						<th>Discount %</th>
+						<th>MRP</th>
 						<th>Stock</th>
 						<th>Unit Price</th>
 						<th>Status</th>
@@ -28,7 +28,7 @@
 						'<td>' . $row['itemNumber'] . '</td>' .
 						//'<td>' . $row['itemName'] . '</td>' .
 						'<td><a href="#" class="itemDetailsHover" data-toggle="popover" id="' . $row['productID'] . '">' . $row['itemName'] . '</a></td>' .
-						'<td>' . $row['discount'] . '</td>' .
+						'<td>' . $row['MRP'] . '</td>' .
 						'<td>' . $row['stock'] . '</td>' .
 						'<td>' . $row['unitPrice'] . '</td>' .
 						'<td>' . $row['status'] . '</td>' .
@@ -44,7 +44,7 @@
 							<th>Product ID</th>
 							<th>Product Number</th>
 							<th>Product Name</th>
-							<th>Discount %</th>
+							<th>MRP</th>
 							<th>Stock</th>
 							<th>Unit Price</th>
 							<th>Status</th>

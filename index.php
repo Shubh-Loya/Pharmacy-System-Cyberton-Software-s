@@ -81,7 +81,7 @@
 								  <!-- <label for="itemDetailsDescription">Description</label> -->
 								  <textarea rows="4" class="form-control" placeholder="Description" name="itemDetailsDescription" id="itemDetailsDescription"></textarea>
 								</div>  
-							  <div class="form-group col-md-2">
+							  <div class="form-group col-md-3">
 									<label for="itemDetailsCategory">Category<span class="requiredIcon">*</span></label>
 									<select id="itemDetailsCategory" name="itemDetailsCategory" class="form-control chosenSelect">
 										<?php include('inc/categoryList.html'); ?>
@@ -89,17 +89,21 @@
 								  </div>
 							  </div>
 							  <div class="form-row">
-								<div class="form-group col-md-3">
-								  <label for="itemDetailsDiscount">Discount %</label>
-								  <input type="text" class="form-control" value="0" name="itemDetailsDiscount" id="itemDetailsDiscount">
-								</div>
-								<div class="form-group col-md-3">
+							    <div class="form-group col-md-2">
 								  <label for="itemDetailsQuantity">Quantity<span class="requiredIcon">*</span></label>
 								  <input type="number" class="form-control" value="0" name="itemDetailsQuantity" id="itemDetailsQuantity">
 								</div>
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-2">
+								   <label for="itemDetailsMRP">MRP<span class="requiredIcon">*</span></label>
+								   <input type="text" class="form-control" id="itemDetailsMRP" name="itemDetailsMRP" value="0">
+								</div>
+								<div class="form-group col-md-2">
 								  <label for="itemDetailsUnitPrice">Unit Price<span class="requiredIcon">*</span></label>
 								  <input type="text" class="form-control" value="0" name="itemDetailsUnitPrice" id="itemDetailsUnitPrice">
+								</div>
+								<div class="form-group col-md-2">
+						  		  <label for="itemDetailsGST">GST %<span class="requiredIcon">*</span></label>
+						 		  <input type="number" class="form-control" id="itemDetailsGST" name="itemDetailsGST" value="0">
 								</div>
 								<div class="form-group col-md-3">
 								  <label for="itemDetailsTotalStock">Total Stock</label>
@@ -165,30 +169,39 @@
 						</div>
 						<div class="form-group col-md-3">
 						  <label for="purchaseDetailsPurchaseDate">Purchase Date<span class="requiredIcon">*</span></label>
-						  <input type="text" class="form-control datepicker" id="purchaseDetailsPurchaseDate" name="purchaseDetailsPurchaseDate" readonly value="2021-03-28">
+						  <input type="text" class="form-control datepicker" id="purchaseDetailsPurchaseDate" name="purchaseDetailsPurchaseDate" readonly value="<?php echo date('Y-m-d');?>">
 						</div>
 						<div class="form-group col-md-2">
 						  <label for="purchaseDetailsPurchaseID">Purchase ID</label>
 						  <input type="text" class="form-control invTooltip" id="purchaseDetailsPurchaseID" name="purchaseDetailsPurchaseID" title="This will be auto-generated when you add a new record" autocomplete="off">
 						  <div id="purchaseDetailsPurchaseIDSuggestionsDiv" class="customListDivWidth"></div>
 						</div>
-						<div class="form-group col-md-2">
+						<div class="form-group col-md-3">
 						  <label for="purchaseDetailsInvoiceNumber">Invoice Number<span class="requiredIcon">*</span></label>
 						  <input type="text" class="form-control" id="purchaseDetailsInvoiceNumber" name="purchaseDetailsInvoiceNumber" autocomplete="off">
 						  <div id="purchaseDetailsInvoiceNumberSuggestionsDiv" class="customListDivWidth"></div>
 						</div>
 					  </div>
 					  <div class="form-row">
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-2">
 						  <label for="purchaseDetailsItemNumber">Product Number<span class="requiredIcon">*</span></label>
 						  <input type="text" class="form-control" id="purchaseDetailsItemNumber" name="purchaseDetailsItemNumber" autocomplete="off">
 						  <div id="purchaseDetailsItemNumberSuggestionsDiv" class="customListDivWidth"></div>
 						</div> 
+						<div class="form-group col-md-2">
+						  <label for="purchaseDetailsBatchNumber">Batch Number<span class="requiredIcon">*</span></label>
+						  <input type="text" class="form-control" id="purchaseDetailsBatchNumber" name="purchaseDetailsBatchNumber" autocomplete="off">
+						  <div id="purchaseDetailsBatchNumberSuggestionsDiv" class="customListDivWidth"></div>
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="purchaseDetailsExpiryDate">Expiry Date<span class="requiredIcon">*</span></label>
+						  <input type="text" class="form-control datepicker" id="purchaseDetailsExpiryDate" name="purchaseDetailsExpiryDate" value="<?php echo date('Y-m-d');?>">
+						</div>
 						  <div class="form-group col-md-2">
 							  <label for="purchaseDetailsCurrentStock">Current Stock</label>
 							  <input type="text" class="form-control" id="purchaseDetailsCurrentStock" name="purchaseDetailsCurrentStock" readonly>
 						  </div>
-						  <div class="form-group col-md-4">
+						  <div class="form-group col-md-3">
 							<label for="purchaseDetailsVendorName">Vendor Name<span class="requiredIcon">*</span></label>
 							<select id="purchaseDetailsVendorName" name="purchaseDetailsVendorName" class="form-control chosenSelect">
 								<?php 
@@ -200,19 +213,30 @@
 					  <div class="form-row">
 						<div class="form-group col-md-2">
 						  <label for="purchaseDetailsQuantity">Quantity<span class="requiredIcon">*</span></label>
-						  <input type="number" class="form-control" id="purchaseDetailsQuantity" name="purchaseDetailsQuantity" value="0">
+						  <input type="number" class="form-control" id="purchaseDetailsQuantity" name="purchaseDetailsQuantity">
 						</div>
+						<div class="form-group col-md-2">
+						  <label for="purchaseDetailsMRP">MRP<span class="requiredIcon">*</span></label>
+						  <input type="text" class="form-control" id="purchaseDetailsMRP" name="purchaseDetailsMRP">
+						</div>	
 						<div class="form-group col-md-2">
 						  <label for="purchaseDetailsUnitPrice">Unit Price<span class="requiredIcon">*</span></label>
-						  <input type="text" class="form-control" id="purchaseDetailsUnitPrice" name="purchaseDetailsUnitPrice" value="0">
-						  
+						  <input type="text" class="form-control" id="purchaseDetailsUnitPrice" name="purchaseDetailsUnitPrice">
 						</div>
 						<div class="form-group col-md-2">
-						  <label for="purchaseDetailsTotal">Total Cost</label>
+						  <label for="purchaseDetailsDiscount">Discount %<span class="requiredIcon">*</span></label>
+						  <input type="number" class="form-control" id="purchaseDetailsDiscount" name="purchaseDetailsDiscount" value="0">
+						</div>
+						<div class="form-group col-md-2">
+						  <label for="purchaseDetailsGST">GST %<span class="requiredIcon">*</span></label>
+						  <input type="number" class="form-control" id="purchaseDetailsGST" name="purchaseDetailsGST" value="0">
+						</div>
+						<div class="form-group col-md-2">
+						  <label for="purchaseDetailsTotal">Total Price</label>
 						  <input type="text" class="form-control" id="purchaseDetailsTotal" name="purchaseDetailsTotal" readonly>
 						</div>
 					  </div>
-					  <button type="button" id="addPurchase1" class="btn btn-success">Add Purchase</button>
+					  <button type="button" id="addPurchase" class="btn btn-success addPurchase1" >Add Purchase</button>
 					  <button type="button" id="updatePurchaseDetailsButton" class="btn btn-primary">Update</button>
 					  <button type="reset" class="btn">Clear</button>
 					</form>
@@ -241,7 +265,8 @@
 				<div id="inserted_item_data"></div>
 			</form>
 				<div align="center">
-					<input type="submit" name="insert" id="insert" class="btn btn-primary" value="Insert to database" />
+					<input type="submit" name="insert" id="addPurchase1" class="btn btn-primary" value="Print" />
+					<button type="reset" class="btn">Clear</button>
 				</div>
 			</form>
 				  </div> 
@@ -358,14 +383,29 @@
 						</div>
 						  <div class="form-group col-md-3">
 							  <label for="saleDetailsSaleDate">Sale Date<span class="requiredIcon">*</span></label>
-							  <input type="text" class="form-control datepicker" id="saleDetailsSaleDate" value="2021-03-28" name="saleDetailsSaleDate" readonly>
+							  <input type="text" class="form-control datepicker" id="saleDetailsSaleDate" value="<?php echo date('Y-m-d');?>" name="saleDetailsSaleDate" readonly>
 						  </div>
 					  </div>
 					  <div class="form-row">
+						<div class="form-group col-md-3">
+						  <label for="saleDetailsBatchNumber">Batch Number<span class="requiredIcon">*</span></label>
+						  <input type="text" class="form-control" id="saleDetailsBatchNumber" name="saleDetailsBatchNumber" autocomplete="off">
+						  <div id="saleDetailsBatchNumberSuggestionsDiv" class="customListDivWidth"></div>
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="saleDetailsExpiryDate">Expiry Date<span class="requiredIcon">*</span></label>
+						  <input type="text" class="form-control datepicker" id="saleDetailsExpiryDate" name="saleDetailsExpiryDate" value="<?php echo date('Y-m-d');?>">
+						</div>
+						<div class="form-group col-md-2">
+						  <label for="saleDetailsMRP">MRP<span class="requiredIcon">*</span></label>
+						  <input type="text" class="form-control" id="saleDetailsMRP" name="saleDetailsMRP">
+						</div>
 						<div class="form-group col-md-2">
 								  <label for="saleDetailsTotalStock">Total Stock</label>
 								  <input type="text" class="form-control" name="saleDetailsTotalStock" id="saleDetailsTotalStock" readonly>
-								</div>
+						</div>
+					  </div>
+					  <div class="form-row">
 						<div class="form-group col-md-2">
 						  <label for="saleDetailsQuantity">Quantity<span class="requiredIcon">*</span></label>
 						  <input type="number" class="form-control" id="saleDetailsQuantity" name="saleDetailsQuantity" value="0">
@@ -378,9 +418,13 @@
 						  <label for="saleDetailsDiscount">Discount %</label>
 						  <input type="text" class="form-control" id="saleDetailsDiscount" name="saleDetailsDiscount" value="0">
 						</div>
+						<div class="form-group col-md-2">
+						  <label for="saleDetailsGST">GST %<span class="requiredIcon">*</span></label>
+						  <input type="number" class="form-control" id="saleDetailsGST" name="saleDetailsGST">
+						</div>
 						<div class="form-group col-md-3">
-						  <label for="saleDetailsTotal">Total</label>
-						  <input type="text" class="form-control" id="saleDetailsTotal" name="saleDetailsTotal">
+						  <label for="saleDetailsTotal">Total Price</label>
+						  <input type="text" class="form-control" id="saleDetailsTotal" name="saleDetailsTotal" readonly>
 						</div>
 					  </div>
 					  <div class="form-row">
@@ -403,20 +447,22 @@
 				  <div id="customerDetailsMessage"></div>
 					 <form> 
 					  <div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
 						  <label for="customerDetailsCustomerFullName">Full Name<span class="requiredIcon">*</span></label>
 						  <input type="text" class="form-control" id="customerDetailsCustomerFullName" name="customerDetailsCustomerFullName">
 						</div>
-						<div class="form-group col-md-2">
-							<label for="customerDetailsStatus">Status</label>
-							<select id="customerDetailsStatus" name="customerDetailsStatus" class="form-control chosenSelect">
-								<?php include('inc/statusList.html'); ?>
-							</select>
-						</div>
-						 <div class="form-group col-md-3">
+						 <div class="form-group col-md-2">
 							<label for="customerDetailsCustomerID">Customer ID</label>
 							<input type="text" class="form-control invTooltip" id="customerDetailsCustomerID" name="customerDetailsCustomerID" title="This will be auto-generated when you add a new customer" autocomplete="off">
 							<div id="customerDetailsCustomerIDSuggestionsDiv" class="customListDivWidth"></div>
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="customerDetailsDrugLicenseNumber">Drug License Number</label>
+						  <input type="text" class="form-control" id="customerDetailsDrugLicenseNumber" name="customerDetailsDrugLicenseNumber" autocomplete="off">
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="customerDetailsGSTRNumber">GSTR Number</label>
+						  <input type="text" class="form-control" id="customerDetailsGSTRNumber" name="customerDetailsGSTRNumber" autocomplete="off">
 						</div>
 					  </div>
 					  <div class="form-row">
@@ -428,9 +474,15 @@
 							<label for="customerDetailsCustomerPhone2">Phone 2</label>
 							<input type="text" class="form-control invTooltip" id="customerDetailsCustomerPhone2" name="customerDetailsCustomerPhone2" title="Do not enter leading 0">
 						  </div>
-						  <div class="form-group col-md-6">
+						  <div class="form-group col-md-4">
 							<label for="customerDetailsCustomerEmail">Email</label>
 							<input type="email" class="form-control" id="customerDetailsCustomerEmail" name="customerDetailsCustomerEmail">
+						</div>
+						<div class="form-group col-md-2">
+							<label for="customerDetailsStatus">Status</label>
+							<select id="customerDetailsStatus" name="customerDetailsStatus" class="form-control chosenSelect">
+								<?php include('inc/statusList.html'); ?>
+							</select>
 						</div>
 					  </div>
 					  <div class="form-group">
@@ -558,11 +610,11 @@
 							  <div class="form-row">
 								  <div class="form-group col-md-3">
 									<label for="saleReportStartDate">Start Date</label>
-									<input type="text" class="form-control datepicker" id="saleReportStartDate" value="2021-03-28" name="saleReportStartDate" readonly>
+									<input type="text" class="form-control datepicker" id="saleReportStartDate" value="<?php echo date('Y-m-d');?>" name="saleReportStartDate" readonly>
 								  </div>
 								  <div class="form-group col-md-3">
 									<label for="saleReportEndDate">End Date</label>
-									<input type="text" class="form-control datepicker" id="saleReportEndDate" value="2021-03-28" name="saleReportEndDate" readonly>
+									<input type="text" class="form-control datepicker" id="saleReportEndDate" value="<?php echo date('Y-m-d');?>" name="saleReportEndDate" readonly>
 								  </div>
 							  </div>
 							  <button type="button" id="showSaleReport" class="btn btn-dark">Show Report</button>
@@ -578,11 +630,11 @@
 							  <div class="form-row">
 								  <div class="form-group col-md-3">
 									<label for="purchaseReportStartDate">Start Date</label>
-									<input type="text" class="form-control datepicker" id="purchaseReportStartDate" value="2021-03-28" name="purchaseReportStartDate" readonly>
+									<input type="text" class="form-control datepicker" id="purchaseReportStartDate" value="<?php echo date('Y-m-d');?>" name="purchaseReportStartDate" readonly>
 								  </div>
 								  <div class="form-group col-md-3">
 									<label for="purchaseReportEndDate">End Date</label>
-									<input type="text" class="form-control datepicker" id="purchaseReportEndDate" value="2021-03-28" name="purchaseReportEndDate" readonly>
+									<input type="text" class="form-control datepicker" id="purchaseReportEndDate" value="<?php echo date('Y-m-d');?>" name="purchaseReportEndDate" readonly>
 								  </div>
 							  </div>
 							  <button type="button" id="showPurchaseReport" class="btn btn-dark">Show Report</button>
@@ -611,7 +663,7 @@
 $(document).ready(function() {
 	var count = 1; 
 	/*Assigning id and class for tr and td tags for separation.*/
-	$("#addPurchase1").click(function() {
+	$(".addPurchase1").click(function() {
 		var new_count = count++; 
 		$("#user_data").append('<tr valign="top" id="'+new_count+'">\n\
 		<td width="100px" >' + new_count + '</td>\n\
@@ -625,7 +677,7 @@ $(document).ready(function() {
 	$("#user_data").on('click', '.remCF', function() {
 		$(this).parent().parent().remove();
 	});
-	/*crating new click event for save button*/
+	/*creating new click event for save button*/
 	$("#insert").click(function() {
 		var lastRowId = $('#user_data tr:last').attr("id"); /*finds id of the last row inside table*/
 		var product_name = new Array(); 
@@ -648,7 +700,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: "save.php",
 			type: "post",
-			data: {product_name : sendProductName , invoice_number : sendInvoice_Number , quantity : sendQuantity , unit_price : sendUnit_Price , total_price : sendTotal_Price},
+			data: {itemName : sendProductName , invoiceNumber : sendInvoice_Number , quantity : sendQuantity , unitPrice : sendUnit_Price , totalPrice : sendTotal_Price},
 			success : function(data){
 				console.log(data); /* alerts the response from php.*/
 			},

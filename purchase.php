@@ -28,7 +28,7 @@
 						</div>
 						<div class="form-group col-md-3">
 						  <label for="purchaseDetailsPurchaseDate">Purchase Date<span class="requiredIcon">*</span></label>
-						  <input type="text" class="form-control datepicker" id="purchaseDetailsPurchaseDate" name="purchaseDetailsPurchaseDate" readonly value="2021-03-28">
+						  <input type="text" class="form-control datepicker" id="purchaseDetailsPurchaseDate" name="purchaseDetailsPurchaseDate" readonly value="<?php echo date('Y-m-d');?>">
 						</div>
 						<div class="form-group col-md-2">
 						  <label for="purchaseDetailsPurchaseID">Purchase ID</label>

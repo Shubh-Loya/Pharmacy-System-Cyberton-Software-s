@@ -38,7 +38,7 @@
       while($row = $sale->fetch(PDO::FETCH_ASSOC)){
           $uPriceSale = $row['unitPrice'];
           $qtySale = $row['quantity'];
-          $discountsSale = $row['discount'];
+          $discountSale = $row['discount'];
           $MonthySale = $MonthySale + ($uPriceSale * $qtySale * ((100 - $discountSale)/100));
   
       } 

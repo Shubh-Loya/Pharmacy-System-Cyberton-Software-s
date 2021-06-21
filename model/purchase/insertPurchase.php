@@ -11,13 +11,19 @@
 		$purchaseDetailsUnitPrice = htmlentities($_POST['purchaseDetailsUnitPrice']);
 		$purchaseDetailsVendorName = htmlentities($_POST['purchaseDetailsVendorName']);
 		$purchaseDetailsInvoiceNumber = htmlentities($_POST['purchaseDetailsInvoiceNumber']);
+		$purchaseDetailsBatchNumber = htmlentities($_POST['purchaseDetailsBatchNumber']);
+		$purchaseDetailsExpiryDate = htmlentities($_POST['purchaseDetailsExpiryDate']);
+		$purchaseDetailsMRP = htmlentities($_POST['purchaseDetailsMRP']);
+		$purchaseDetailsDiscount = htmlentities($_POST['purchaseDetailsDiscount']);
+		$purchaseDetailsGST = htmlentities($_POST['purchaseDetailsGST']);
+		$purchaseDetailsTotal = htmlentities($_POST['purchaseDetailsTotal']);
 		
 		
 		$initialStock = 0;
 		$newStock = 0;
 		
 		// Check if mandatory fields are not empty
-		if(isset($purchaseDetailsItemNumber) && isset($purchaseDetailsPurchaseDate) && isset($purchaseDetailsItemName) && isset($purchaseDetailsQuantity) && isset($purchaseDetailsUnitPrice) && isset($purchaseDetailsInvoiceNumber)){
+		if(isset($purchaseDetailsItemNumber) && isset($purchaseDetailsPurchaseDate) && isset($purchaseDetailsItemName) && isset($purchaseDetailsQuantity) && isset($purchaseDetailsUnitPrice) && isset($purchaseDetailsInvoiceNumber) && isset($purchaseDetailsBatchNumber) && isset($purchaseDetailsExpiryDate) && isset($purchaseDetailsMRP) && isset($purchaseDetailsGST)){
 			
 			// Check if itemNumber is empty
 			if($purchaseDetailsItemNumber == ''){ 
@@ -48,7 +54,27 @@
 				exit();
 
 			}
-			
+			// Check if batchNumber is empty
+			if($purchaseDetailsBatchNumber == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter Batch Number.</div>';
+				exit();
+			}
+			// Check if expiryDate is empty
+			if($purchaseDetailsExpiryDate == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter Expiry Date.</div>';
+				exit();
+			}
+			// Check if MRP is empty
+			if($purchaseDetailsMRP == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter MRP.</div>';
+				exit();
+			}
+			// Check if GST is empty
+			if($purchaseDetailsGST == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter GST.</div>';
+				exit();
+			}
+
 			// Sanitize item number
 			$purchaseDetailsItemNumber = filter_var($purchaseDetailsItemNumber, FILTER_SANITIZE_STRING);
 			
@@ -85,9 +111,9 @@
 				$vendorID = $row['vendorID'];
 				
 				// Item exits in the item table, therefore, start the inserting data to purchase table
-				$insertPurchaseSql = 'INSERT INTO purchase(invoiceNumber, itemNumber, purchaseDate, itemName, unitPrice, quantity, vendorName, vendorID) VALUES(:invoiceNumber, :itemNumber, :purchaseDate, :itemName, :unitPrice, :quantity, :vendorName, :vendorID)';
+				$insertPurchaseSql = 'INSERT INTO purchase(invoiceNumber, itemNumber, purchaseDate, itemName, batchNumber, expiryDate, MRP, unitPrice, discount, GST, quantity, vendorName, vendorID, totalPrice) VALUES(:invoiceNumber, :itemNumber, :purchaseDate, :itemName, :batchNumber, :expiryDate, :MRP, :unitPrice, :discount, :GST, :quantity, :vendorName, :vendorID, :totalPrice)';
 				$insertPurchaseStatement = $conn->prepare($insertPurchaseSql);
-				$insertPurchaseStatement->execute(['invoiceNumber' => $purchaseDetailsInvoiceNumber,'itemNumber' => $purchaseDetailsItemNumber, 'purchaseDate' => $purchaseDetailsPurchaseDate, 'itemName' => $purchaseDetailsItemName, 'unitPrice' => $purchaseDetailsUnitPrice, 'quantity' => $purchaseDetailsQuantity, 'vendorName' => $purchaseDetailsVendorName, 'vendorID' => $vendorID]);
+				$insertPurchaseStatement->execute(['invoiceNumber' => $purchaseDetailsInvoiceNumber,'itemNumber' => $purchaseDetailsItemNumber, 'purchaseDate' => $purchaseDetailsPurchaseDate, 'itemName' => $purchaseDetailsItemName, 'batchNumber' => $purchaseDetailsBatchNumber, 'expiryDate' => $purchaseDetailsExpiryDate, 'MRP' => $purchaseDetailsMRP, 'unitPrice' => $purchaseDetailsUnitPrice, 'discount' => $purchaseDetailsDiscount, 'GST' => $purchaseDetailsGST, 'quantity' => $purchaseDetailsQuantity, 'vendorName' => $purchaseDetailsVendorName, 'vendorID' => $vendorID, 'totalPrice' => $purchaseDetailsTotal]);
 				
 				// Calculate the new stock value using the existing stock in item table
 				$row = $stockStatement->fetch(PDO::FETCH_ASSOC);

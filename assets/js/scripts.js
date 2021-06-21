@@ -88,11 +88,17 @@ showItemNumberForPurchaseTabFile =
 // File that returns itemNames for purchase tab
 showItemNameForPurchaseTabFile = "model/item/showItemNameForPurchaseTab.php";
 
+// File that returns batchNumber for purchase tab
+showBatchNumberFile = "model/purchase/showBatchNumber.php";
+
 // File that returns itemNumbers for sale tab
 showItemNumberForSaleTabFile = "model/item/showItemNumberForSaleTab.php";
 
 // File that returns itemNames for sale tab
 showItemNameForSaleTabFile = "model/item/showItemNameForSaleTab.php";
+
+// File that returns batchNumber for sale tab
+showBatchNumberForSaleTabFile = "model/sale/showBatchNumberforSaleTab.php"
 
 // File that returns itemNames for image tab
 showItemNameForImageTabFile = "model/item/showItemNameForImageTab.php";
@@ -213,6 +219,26 @@ $(document).ready(function () {
     });
   });
 
+  // Listen to batch number text box in purchase details tab
+  $("#purchaseDetailsBatchNumber").on("click", function () {
+    showSuggestion(
+      showBatchNumberFile,
+      "purchaseDetailsBatchNumberSuggestionsDiv"
+    );
+  });
+
+  // Remove the item names suggestions dropdown in the purchase details tab
+  // when user selects an item from it
+  $(document).on(
+    "click",
+    "#purchaseDetailsBatchNumberSuggestionsList li",
+    function () {
+      $("#purchaseDetailsBatchNumber").val($(this).text());
+      $("#purchaseDetailsBatchNumberSuggestionsList").fadeOut();
+      getItemsDetailsToPopulate();
+    }
+  );
+
   // Listen to item name text box in item details tab
   $("#itemDetailsItemName").keyup(function () {
     showSuggestions(
@@ -296,6 +322,26 @@ $(document).ready(function () {
       getItemDetailsToPopulateForSaleTab();
     }
   );
+
+  // Listen to batch number text box in sale details tab
+    $("#saleDetailsBatchNumber").on("click", function () {
+      showSuggestionforSale(
+        showBatchNumberForSaleTabFile,
+        "saleDetailsBatchNumberSuggestionsDiv"
+      );
+    });
+  
+  // Remove the item names suggestions dropdown in the sale details tab
+  // when user selects an item from it
+    $(document).on(
+      "click",
+      "#saleDetailsBatchNumberSuggestionsList li",
+      function () {
+        $("#saleDetailsBatchNumber").val($(this).text());
+        $("#saleDetailsBatchNumberSuggestionsList").fadeOut();
+        getItemsDetailsToPopulate();
+      }
+    );
 
   // Listen to item name text box in item image tab
   $("#itemImageItemName").keyup(function () {
@@ -400,7 +446,9 @@ $(document).ready(function () {
         "purchaseDetailsItemName",
         getItemsStockFile,
         "purchaseDetailsCurrentStock",
-        "purchaseDetailsUnitPrice"
+        "purchaseDetailsUnitPrice",
+        "purchaseDetailsMRP",
+        "purchaseDetailsGST"
       );
     }
   );
@@ -581,12 +629,12 @@ $(document).ready(function () {
   });
 
   // Calculate Total in purchase tab
-  $("#purchaseDetailsQuantity, #purchaseDetailsUnitPrice").change(function () {
+  $("#purchaseDetailsQuantity, #purchaseDetailsUnitPrice, #purchaseDetailsGST, #purchaseDetailsDiscount").change(function () {
     calculateTotalInPurchaseTab();
   });
 
   // Calculate Total in sale tab
-  $("#saleDetailsDiscount, #saleDetailsQuantity, #saleDetailsUnitPrice").change(
+  $("#saleDetailsDiscount, #saleDetailsQuantity, #saleDetailsUnitPrice, #saleDetailsGST").change(
     function () {
       calculateTotalInSaleTab();
     }
@@ -1244,8 +1292,12 @@ function filteredPurchaseReportTableCreator(
 // Calculate Total Purchase value in purchase details tab
 function calculateTotalInPurchaseTab() {
   var quantityPT = $("#purchaseDetailsQuantity").val();
+  var DiscountPT = $("#purchaseDetailsDiscount").val();
+  var GSTPT = $("#purchaseDetailsGST").val();
   var unitPricePT = $("#purchaseDetailsUnitPrice").val();
-  $("#purchaseDetailsTotal").val(Number(quantityPT) * Number(unitPricePT));
+  $("#purchaseDetailsTotal").val(Number(quantityPT) * Number(unitPricePT) * ((100 - Number(DiscountPT)) / 100) * ((100 + Number(GSTPT)) / 100));
+  var totalPrice = Number(quantityPT) * Number(unitPricePT) * ((100 - Number(DiscountPT)) / 100) * ((100 + Number(GSTPT)) / 100);
+  return totalPrice;
 }
 
 // Calculate Total sale value in sale details tab
@@ -1253,11 +1305,11 @@ function calculateTotalInSaleTab() {
   var quantityST = $("#saleDetailsQuantity").val();
   var unitPriceST = $("#saleDetailsUnitPrice").val();
   var discountST = $("#saleDetailsDiscount").val();
-  $("#saleDetailsTotal").val(
-    Number(unitPriceST) *
-      ((100 - Number(discountST)) / 100) *
-      Number(quantityST)
-  );
+  var GSTST = $("#saleDetailsGST").val();
+  console.log(GSTST);
+  $("#saleDetailsTotal").val(Number(quantityST) * Number(unitPriceST) * ((100 - Number(discountST)) / 100) * ((100 + Number(GSTST)) / 100));
+  var totalPrice = Number(quantityST) * Number(unitPriceST) * ((100 - Number(discountST)) / 100) * ((100 + Number(GSTST)) / 100);
+  return totalPrice;
 }
 
 // Function to call the insertCustomer.php script to insert customer data to db
@@ -1268,6 +1320,8 @@ function addCustomer() {
   var customerDetailsCustomerEmail = $("#customerDetailsCustomerEmail").val();
   var customerDetailsCustomerMobile = $("#customerDetailsCustomerMobile").val();
   var customerDetailsCustomerPhone2 = $("#customerDetailsCustomerPhone2").val();
+  var customerDetailsDrugLicenseNumber = $("#customerDetailsDrugLicenseNumber").val();
+  var customerDetailsGSTRNumber = $("#customerDetailsGSTRNumber").val();
   var customerDetailsCustomerAddress = $(
     "#customerDetailsCustomerAddress"
   ).val();
@@ -1287,6 +1341,8 @@ function addCustomer() {
     method: "POST",
     data: {
       customerDetailsCustomerFullName: customerDetailsCustomerFullName,
+      customerDetailsDrugLicenseNumber: customerDetailsDrugLicenseNumber,
+      customerDetailsGSTRNumber: customerDetailsGSTRNumber,
       customerDetailsCustomerEmail: customerDetailsCustomerEmail,
       customerDetailsCustomerMobile: customerDetailsCustomerMobile,
       customerDetailsCustomerPhone2: customerDetailsCustomerPhone2,
@@ -1372,11 +1428,14 @@ function addVendor() {
 function addItem() {
   var itemDetailsItemNumber = $("#itemDetailsItemNumber").val();
   var itemDetailsItemName = $("#itemDetailsItemName").val();
-  var itemDetailsDiscount = $("#itemDetailsDiscount").val();
+  // var itemDetailsDiscount = $("#itemDetailsDiscount").val();
   var itemDetailsQuantity = $("#itemDetailsQuantity").val();
   var itemDetailsUnitPrice = $("#itemDetailsUnitPrice").val();
   var itemDetailsStatus = $("#itemDetailsStatus").val();
   var itemDetailsDescription = $("#itemDetailsDescription").val();
+  var itemDetailsCategory = $("#itemDetailsCategory").val();
+  var itemDetailsMRP = $("#itemDetailsMRP").val();
+  var itemDetailsGST = $("#itemDetailsGST").val();
 
   $.ajax({
     url: "model/item/insertItem.php",
@@ -1384,11 +1443,14 @@ function addItem() {
     data: {
       itemDetailsItemNumber: itemDetailsItemNumber,
       itemDetailsItemName: itemDetailsItemName,
-      itemDetailsDiscount: itemDetailsDiscount,
+      // itemDetailsDiscount: itemDetailsDiscount,
       itemDetailsQuantity: itemDetailsQuantity,
       itemDetailsUnitPrice: itemDetailsUnitPrice,
       itemDetailsStatus: itemDetailsStatus,
       itemDetailsDescription: itemDetailsDescription,
+      itemDetailsCategory: itemDetailsCategory,
+      itemDetailsMRP: itemDetailsMRP,
+      itemDetailsGST: itemDetailsGST,
     },
     success: function (data) {
       $("#itemDetailsMessage").fadeIn();
@@ -1424,6 +1486,12 @@ function addPurchase() {
   var purchaseDetailsUnitPrice = $("#purchaseDetailsUnitPrice").val();
   var purchaseDetailsVendorName = $("#purchaseDetailsVendorName").val();
   var purchaseDetailsInvoiceNumber = $("#purchaseDetailsInvoiceNumber").val();
+  var purchaseDetailsBatchNumber = $("#purchaseDetailsBatchNumber").val();
+  var purchaseDetailsExpiryDate = $("#purchaseDetailsExpiryDate").val();
+  var purchaseDetailsMRP = $("#purchaseDetailsMRP").val();
+  var purchaseDetailsDiscount = $("#purchaseDetailsDiscount").val();
+  var purchaseDetailsGST = $("#purchaseDetailsGST").val();
+  var purchaseDetailsTotal = calculateTotalInPurchaseTab();
 
   $.ajax({
     url: "model/purchase/insertPurchase.php",
@@ -1436,6 +1504,12 @@ function addPurchase() {
       purchaseDetailsUnitPrice: purchaseDetailsUnitPrice,
       purchaseDetailsVendorName: purchaseDetailsVendorName,
       purchaseDetailsInvoiceNumber: purchaseDetailsInvoiceNumber,
+      purchaseDetailsBatchNumber: purchaseDetailsBatchNumber,
+      purchaseDetailsExpiryDate: purchaseDetailsExpiryDate,
+      purchaseDetailsMRP: purchaseDetailsMRP,
+      purchaseDetailsDiscount: purchaseDetailsDiscount,
+      purchaseDetailsGST: purchaseDetailsGST,
+      purchaseDetailsTotal: purchaseDetailsTotal,
     },
     success: function (data) {
       $("#purchaseDetailsMessage").fadeIn();
@@ -1485,6 +1559,11 @@ function addSale() {
   var saleDetailsCustomerID = $("#saleDetailsCustomerID").val();
   var saleDetailsCustomerName = $("#saleDetailsCustomerName").val();
   var saleDetailsSaleDate = $("#saleDetailsSaleDate").val();
+  var saleDetailsBatchNumber = $("#saleDetailsBatchNumber").val();
+  var saleDetailsExpiryDate = $("#saleDetailsExpiryDate").val();
+  var saleDetailsMRP = $("#saleDetailsMRP").val();
+  var saleDetailsGST = $("#saleDetailsGST").val();
+  var saleDetailsTotal = calculateTotalInSaleTab();
 
   $.ajax({
     url: "model/sale/insertSale.php",
@@ -1498,6 +1577,11 @@ function addSale() {
       saleDetailsCustomerID: saleDetailsCustomerID,
       saleDetailsCustomerName: saleDetailsCustomerName,
       saleDetailsSaleDate: saleDetailsSaleDate,
+      saleDetailsBatchNumber: saleDetailsBatchNumber,
+      saleDetailsExpiryDate: saleDetailsExpiryDate,
+      saleDetailsMRP: saleDetailsMRP,
+      saleDetailsGST: saleDetailsGST,
+      saleDetailsTotal: saleDetailsTotal,
     },
     success: function (data) {
       $("#saleDetailsMessage").fadeIn();
@@ -1559,6 +1643,8 @@ function getItemsDetailsToPopulate() {
       $("#itemDetailsUnitPrice").val(data.unitPrice);
       $("#itemDetailsDescription").val(data.description);
       $("#itemDetailsStatus").val(data.status).trigger("chosen:updated");
+      $("#itemDetailsGST").val(data.GST);
+      $("#itemDetailsMRP").val(data.MRP);
 
       newImgUrl = "data/item_images/" + data.itemNumber + "/" + data.imageURL;
 
@@ -1636,6 +1722,8 @@ function getItemsDetailsToPopulateForSaleTab() {
       $("#saleDetailsDiscount").val(data.discount);
       $("#saleDetailsTotalStock").val(data.stock);
       $("#saleDetailsUnitPrice").val(data.unitPrice);
+      $("#saleDetailsMRP").val(data.MRP);
+      $("#saleDetailsGST").val(data.GST);
 
       newImgUrl = "data/item_images/" + data.itemNumber + "/" + data.imageURL;
 
@@ -1737,7 +1825,9 @@ function getItemsStockToPopulate(
   itemNameTextbox,
   scriptPath,
   stockTextbox,
-  unitPriceTextbox
+  unitPriceTextbox,
+  MRPTextbox,
+  GSTTextbox
 ) {
   // Get the itemName entered in the text box
   var itemName = $("#" + itemNameTextbox).val();
@@ -1751,6 +1841,8 @@ function getItemsStockToPopulate(
     success: function (data) {
       $("#" + stockTextbox).val(data.stock);
       $("#" + unitPriceTextbox).val(data.unitPrice);
+      $("#" + MRPTextbox).val(data.MRP);
+      $("#" + GSTTextbox).val(data.GST);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       //alert(xhr.status);
@@ -1792,6 +1884,26 @@ function populateLastInsertedID(scriptPath, textBoxID) {
       $("#" + textBoxID).val(data);
     },
   });
+}
+
+// Function to show suggestions
+function showSuggestion(scriptPath, suggestionsDivID) {
+  // Get the value entered by the user
+  var purchaseDetailsBatchNumber = $("#purchaseDetailsBatchNumber").val();
+  var purchaseDetailsItemName = $("#purchaseDetailsItemName").val();
+
+    $.ajax({
+      url: scriptPath,
+      method: "POST",
+      data: { 
+        purchaseDetailsBatchNumber: purchaseDetailsBatchNumber,
+        purchaseDetailsItemName: purchaseDetailsItemName,
+      },
+      success: function (data) {
+        $("#" + suggestionsDivID).fadeIn();
+        $("#" + suggestionsDivID).html(data);
+      },
+    });
 }
 
 // Function to show suggestions
@@ -1980,6 +2092,26 @@ function getCustomerDetailsToPopulateSaleTab() {
   });
 }
 
+// Function to show suggestions to display batch number in sale tab
+function showSuggestionforSale(scriptPath, suggestionsDivID) {
+  // Get the value entered by the user
+  var saleDetailsBatchNumber = $("#saleDetailsBatchNumber").val();
+  var saleDetailsItemName = $("#saleDetailsItemName").val();
+
+    $.ajax({
+      url: scriptPath,
+      method: "POST",
+      data: { 
+        saleDetailsBatchNumber: saleDetailsBatchNumber,
+        saleDetailsItemName: saleDetailsItemName,
+      },
+      success: function (data) {
+        $("#" + suggestionsDivID).fadeIn();
+        $("#" + suggestionsDivID).html(data);
+      },
+    });
+}
+
 // Function to send vendorID so that vendor details can be pulled from db
 // to be displayed on vendor details tab
 function getVendorDetailsToPopulate() {
@@ -2015,7 +2147,7 @@ function getVendorDetailsToPopulate() {
 function getPurchaseDetailsToPopulate() {
   // Get the purchaseID entered in the text box
   var purchaseDetailsPurchaseID = $("#purchaseDetailsPurchaseID").val();
-
+  console.log(calculateTotalInPurchaseTab());
   // Call the populatePurchaseDetails.php script to get item details
   // relevant to the itemNumber which the user entered
   $.ajax({
