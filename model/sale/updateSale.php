@@ -14,6 +14,11 @@
 		$saleDetailsCustomerName = htmlentities($_POST['saleDetailsCustomerName']);
 		$saleDetailsDiscount = htmlentities($_POST['saleDetailsDiscount']);
 		$saleDetailsCustomerID = htmlentities($_POST['saleDetailsCustomerID']);
+		$batchNumber = htmlentities($_POST['saleDetailsBatchNumber']);
+		$expiryDate = htmlentities($_POST['saleDetailsExpiryDate']);
+		$MRP = htmlentities($_POST['saleDetailsMRP']);
+		$GST = htmlentities($_POST['saleDetailsGST']);
+		$billNumber = htmlentities($_POST['saleDetailsBillNumber']);
 		
 		$quantityInOriginalOrder = 0;
 		$quantityInNewOrder = 0;
@@ -21,7 +26,7 @@
 		$newStock = 0;
 		
 		// Check if mandatory fields are not empty
-		if(isset($saleDetailsItemNumber) && isset($saleDetailsSaleDate) && isset($saleDetailsQuantity) && isset($saleDetailsUnitPrice) && isset($saleDetailsCustomerID)){
+		if(isset($saleDetailsItemNumber) && isset($saleDetailsSaleDate) && isset($saleDetailsQuantity) && isset($saleDetailsUnitPrice) && isset($saleDetailsCustomerID) && isset($batchNumber) && isset($expiryDate) && isset($MRP) && isset($GST) && isset($billNumber)){
 			
 			// Sanitize item number
 			$saleDetailsItemNumber = filter_var($saleDetailsItemNumber, FILTER_SANITIZE_STRING);
@@ -85,6 +90,36 @@
 				exit();
 			}
 			
+			// Check if batch number is empty
+			if($batchNumber == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter Batch Number.</div>';
+				exit();
+			}
+
+			// Check if expiry date is empty
+			if($expiryDate == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter Expiry Date.</div>';
+				exit();
+			}
+
+			// Check if mrp is empty
+			if($MRP == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter MRP.</div>';
+				exit();
+			}
+
+			// Check if gst is empty
+			if($GST == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter GST %.</div>';
+				exit();
+			}
+
+			// Check if bill number is empty
+			if($billNumber == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter Bill Number.</div>';
+				exit();
+			}
+
 			// Get the quantity and itemNumber in original sale order
 			$orginalSaleQuantitySql = 'SELECT * FROM sale WHERE saleID = :saleID';
 			$originalSaleQuantityStatement = $conn->prepare($orginalSaleQuantitySql);
@@ -194,10 +229,9 @@
 						$updateStockStatement->execute(['stock' => $newStock, 'itemNumber' => $saleDetailsItemNumber]);
 						
 						// Next, update the sale table
-						$updateSaleDetailsSql = 'UPDATE sale SET itemNumber = :itemNumber, saleDate = :saleDate, itemName = :itemName, unitPrice = :unitPrice, discount = :discount, quantity = :quantity, customerName = :customerName, customerID = :customerID WHERE saleID = :saleID';
+						$updateSaleDetailsSql = 'UPDATE sale SET itemNumber = :itemNumber, saleDate = :saleDate, itemName = :itemName, unitPrice = :unitPrice, discount = :discount, quantity = :quantity, customerName = :customerName, batchNumber = :batchNumber, expiryDate = :expiryDate, GST = :GST, MRP = :MRP, billNumber = :billNumber, customerID = :customerID WHERE saleID = :saleID';
 						$updateSaleDetailsStatement = $conn->prepare($updateSaleDetailsSql);
-						$updateSaleDetailsStatement->execute(['itemNumber' => $saleDetailsItemNumber, 'saleDate' => $saleDetailsSaleDate, 'itemName' => $saleDetailsItemName, 'unitPrice' => $saleDetailsUnitPrice, 'discount' => $saleDetailsDiscount, 'quantity' => $saleDetailsQuantity, 'customerName' => $saleDetailsCustomerName, 'customerID' => $customerID, 'saleID' => $saleDetailsSaleID]);
-						
+						$updateSaleDetailsStatement->execute(['itemNumber' => $saleDetailsItemNumber, 'saleDate' => $saleDetailsSaleDate, 'itemName' => $saleDetailsItemName, 'unitPrice' => $saleDetailsUnitPrice, 'discount' => $saleDetailsDiscount, 'quantity' => $saleDetailsQuantity, 'customerName' => $saleDetailsCustomerName, 'batchNumber' => $batchNumber, 'expiryDate' => $expiryDate, 'GST' => $GST, 'MRP' => $MRP, 'billNumber' => $billNumber, 'saleID' => $saleDetailsSaleID, 'customerID' => $customerID]);
 						echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Sale details updated.</div>';
 						exit();
 						

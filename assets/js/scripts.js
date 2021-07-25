@@ -60,6 +60,9 @@ showPurchaseIDSuggestionsFile = "model/purchase/showPurchaseIDs.php";
 // File that returns saleIDs
 showSaleIDSuggestionsFile = "model/sale/showSaleIDs.php";
 
+// File that returns paymentIDs
+showPaymentIDSuggestionsFile = "model/payment/showPaymentIDs.php";
+
 // File that returns vendorIDs
 showVendorIDSuggestionsFile = "model/vendor/showVendorIDs.php";
 
@@ -164,6 +167,16 @@ $(document).ready(function () {
     addSale();
   });
 
+  // Listen to payments add button
+  $("#addPayment").on("click", function () {
+    addPayment();
+  });
+
+  // Listen to receipts add button
+  $("#addReceipt").on("click", function () {
+    addReceipt();
+  });
+
   // Listen to update button in item details tab
   $("#updateItemDetailsButton").on("click", function () {
     updateItem();
@@ -187,6 +200,38 @@ $(document).ready(function () {
   // Listen to update button in sale details tab
   $("#updateSaleDetailsButton").on("click", function () {
     updateSale();
+  });
+  
+  // Listen to update button in payment details tab
+   $("#updatePaymentButton").on("click", function () {
+     console.log("click");
+    updatePayment();
+  });
+
+  // Listen to update button in receiptdetails tab
+   $("#updateReceiptButton").on("click", function () {
+     console.log("click");
+    updateReceipt();
+  });
+
+  // Listen to delete button in payment details tab
+   $("#deletePayment").on("click", function () {
+    // Confirm before deleting
+    bootbox.confirm("Are you sure you want to delete?", function (result) {
+      if (result) {
+        deletePayment();
+      }
+    });
+  });
+
+  // Listen to delete button in receipt details tab
+   $("#deleteReceipt").on("click", function () {
+    // Confirm before deleting
+    bootbox.confirm("Are you sure you want to delete?", function (result) {
+      if (result) {
+        deleterReceipt();
+      }
+    });
   });
 
   // Listen to delete button in item details tab
@@ -390,13 +435,27 @@ $(document).ready(function () {
   );
 
   // Clear the image from item tab when Clear button is clicked
-  $("#itemClear").on("click", function () {
+   $("#itemClear").on("click", function () {
     $("#imageContainer").empty();
+    document.getElementById("itemDetailsMessage").style.display = "none";
   });
 
   // Clear the image from sale tab when Clear button is clicked
   $("#saleClear").on("click", function () {
     $("#saleDetailsImageContainer").empty();
+    document.getElementById("saleDetailsMessage").style.display = "none";
+  });
+  
+  // Clear the payment from payment tab when Clear button is clicked
+  $("#paymentClear").on("click", function () {
+    // $("#saleDetailsImageContainer").empty();
+    document.getElementById("paymentDetailsMessage").style.display = "none";
+  });
+
+  // Clear the receipt from receipt tab when Clear button is clicked
+  $("#receiptClear").on("click", function () {
+    // $("#saleDetailsImageContainer").empty();
+    document.getElementById("receiptDetailsMessage").style.display = "none";
   });
 
   // Refresh the purchase report datatable in the purchase report tab when Clear button is clicked
@@ -590,6 +649,28 @@ $(document).ready(function () {
       $("#purchaseDetailsPurchaseIDSuggestionsList").fadeOut();
       console.log("Hi");
       getPurchaseDetailsToPopulate();
+    }
+  );
+  
+  // Listen to PaymentID text box in payment and receipts tab
+  $("#paymentDetailsPaymentID").on("click", function () {
+    console.log("xyz");
+    showSuggestionPayment(
+      "paymentDetailsPaymentID",
+      showPaymentIDSuggestionsFile,
+      "paymentDetailsPaymentIDSuggestionsDiv"
+    );
+  });
+
+  // Remove the PaymentID suggestions dropdown in the payment and receipts tab
+  // when user selects an item from it
+  $(document).on(
+    "click",
+    "#paymentDetailsPaymentIDSuggestionsList li",
+    function () {
+      $("#paymentDetailsPaymentID").val($(this).text());
+      $("#paymentDetailsPaymentIDSuggestionsList").fadeOut();
+      getPaymentDetailsToPopulate();
     }
   );
 
@@ -1477,6 +1558,72 @@ function addItem() {
   });
 }
 
+// Function to call the insertPayment.php script to insert Payment data to db
+function addPayment() {
+  
+  var paymentDetailsVendorName = $("#paymentDetailsVendorName").val();
+  var paymentDetailsPaymentDate = $("#paymentDetailsPaymentDate").val();
+  var paymentDetailsPaymentID = $("#paymentDetailsPaymentID").val();
+  var paymentDetailsInvoiceNumber = $("#paymentDetailsInvoiceNumber").val();
+  var paymentDetailsPaymentStatus = $("#paymentDetailsPaymentStatus").val();
+  var paymentDetailsPaidAmount = $("#paymentDetailsPaidAmount").val();
+  var paymentDetailsModeofPayment = $("#paymentDetailsModeofPayment").val();
+  var paymentDetailsDescription = $("#paymentDetailsDescription").val();
+
+  $.ajax({
+    url: "model/payment/insertPayment.php",
+    method: "POST",
+    data: {
+	  paymentDetailsVendorName: paymentDetailsVendorName,
+      paymentDetailsPaymentDate: paymentDetailsPaymentDate,
+      paymentDetailsPaymentID: paymentDetailsPaymentID,
+      paymentDetailsInvoiceNumber: paymentDetailsInvoiceNumber,
+      paymentDetailsPaymentStatus: paymentDetailsPaymentStatus,
+      paymentDetailsPaidAmount: paymentDetailsPaidAmount,
+      paymentDetailsModeofPayment: paymentDetailsModeofPayment,
+      paymentDetailsDescription: paymentDetailsDescription,
+    },
+    success: function (data) {
+      $("#paymentDetailsMessage").fadeIn();
+      $("#paymentDetailsMessage").html(data);
+    },
+  });
+  
+}
+
+// Function to call the insertReceipt.php script to insert Receipt data to db
+function addReceipt() {
+  
+  var receiptDetailsCustomerName = $("#receiptDetailsCustomerName").val();
+  var receiptDetailsPaymentDate = $("#receiptDetailsPaymentDate").val();
+  var receiptDetailsReceiptID = $("#receiptDetailsReceiptID").val();
+  var receiptDetailsBillNumber = $("#receiptDetailsBillNumber").val();
+  var receiptDetailsPaymentStatus = $("#receiptDetailsPaymentStatus").val();
+  var receiptDetailsPaidAmount = $("#receiptDetailsPaidAmount").val();
+  var receiptDetailsModeofPayment = $("#receiptDetailsModeofPayment").val();
+  var receiptDetailsDescription = $("#receiptDetailsDescription").val();
+
+  $.ajax({
+    url: "model/Receipt/insertReceipt.php",
+    method: "POST",
+    data: {
+	    receiptDetailsCustomerName: receiptDetailsCustomerName,
+      receiptDetailsPaymentDate: receiptDetailsPaymentDate,
+      receiptDetailsReceiptID: receiptDetailsReceiptID,
+      receiptDetailsBillNumber: receiptDetailsBillNumber,
+      receiptDetailsPaymentStatus: receiptDetailsPaymentStatus,
+      receiptDetailsPaidAmount: receiptDetailsPaidAmount,
+      receiptDetailsModeofPayment: receiptDetailsModeofPayment,
+      receiptDetailsDescription: receiptDetailsDescription,
+    },
+    success: function (data) {
+      $("#receiptDetailsMessage").fadeIn();
+      $("#receiptDetailsMessage").html(data);
+    },
+  });
+  
+}
+
 // Function to call the insertPurchase.php script to insert purchase data to db
 function addPurchase() {
   var purchaseDetailsItemNumber = $("#purchaseDetailsItemNumber").val();
@@ -1553,6 +1700,7 @@ function addPurchase() {
 function addSale() {
   var saleDetailsItemNumber = $("#saleDetailsItemNumber").val();
   var saleDetailsItemName = $("#saleDetailsItemName").val();
+  var saleDetailsBillNumber= $("#saleDetailsBillNumber").val();
   var saleDetailsDiscount = $("#saleDetailsDiscount").val();
   var saleDetailsQuantity = $("#saleDetailsQuantity").val();
   var saleDetailsUnitPrice = $("#saleDetailsUnitPrice").val();
@@ -1571,6 +1719,7 @@ function addSale() {
     data: {
       saleDetailsItemNumber: saleDetailsItemNumber,
       saleDetailsItemName: saleDetailsItemName,
+      saleDetailsBillNumber: saleDetailsBillNumber,
       saleDetailsDiscount: saleDetailsDiscount,
       saleDetailsQuantity: saleDetailsQuantity,
       saleDetailsUnitPrice: saleDetailsUnitPrice,
@@ -1614,6 +1763,29 @@ function addSale() {
         itemReportsSearchTableCreatorFile,
         "itemReportsTable"
       );
+    },
+  });
+}
+
+function getPaymentDetailsToPopulate() {
+  // Get the itemName entered in the text box
+  var paymentDetailsPaymentID = $("#paymentDetailsPaymentID").val();
+
+  // Call the populatePaymentDetails.php script to get item details
+  // relevant to the paymentID which the user entered
+  $.ajax({
+    url: "model/payment/populatePaymentDetails.php",
+    method: "POST",
+    data: { paymentDetailsPaymentID: paymentDetailsPaymentID },
+    dataType: "json",
+    success: function (data) {
+      $("#paymentDetailsVendorName").val(data.vendorName).trigger("chosen:updated");
+      $("#paymentDetailsPaymentDate").val(data.paymentDate);
+      $("#paymentDetailsInvoiceNumber").val(data.invoiceNumber);
+      $("#paymentDetailsPaymentStatus").val(data.paymentStatus).trigger("chosen:updated");
+      $("#paymentDetailsPaidAmount").val(data.paidAmount);
+      $("#paymentDetailsModeofPayment").val(data.paymentMode).trigger("chosen:updated");
+      $("#paymentDetailsDescription").val(data.description); 
     },
   });
 }
@@ -1907,6 +2079,24 @@ function showSuggestion(scriptPath, suggestionsDivID) {
 }
 
 // Function to show suggestions
+function showSuggestionPayment(textBoxID, scriptPath, suggestionsDivID) {
+  // Get the value entered by the user
+  var textBoxValue = $("#" + textBoxID).val();
+
+  // Call the showPurchaseIDs.php script only if there is a value in the
+  // purchase ID textbox
+    $.ajax({
+      url: scriptPath,
+      method: "POST",
+      data: { textBoxValue: textBoxValue },
+      success: function (data) {
+        $("#" + suggestionsDivID).fadeIn();
+        $("#" + suggestionsDivID).html(data);
+      },
+    });
+}
+
+// Function to show suggestions
 function showSuggestions(textBoxID, scriptPath, suggestionsDivID) {
   // Get the value entered by the user
   var textBoxValue = $("#" + textBoxID).val();
@@ -1985,6 +2175,46 @@ function deleteCustomer() {
           customerReportsSearchTableCreatorFile,
           "customerReportsTable"
         );
+      },
+    });
+  }
+}
+
+// Function to delete payment from db
+function deletePayment() {
+  // Get the paymentID entered by the user
+  var paymentDetailsPaymentID = $("#paymentDetailsPaymentID").val();
+
+  // Call the deletePayment.php script only if there is a value in the
+  // item number textbox
+  if (paymentDetailsPaymentID != "") {
+    $.ajax({
+      url: "model/payment/deletePayment.php",
+      method: "POST",
+      data: { paymentDetailsPaymentID: paymentDetailsPaymentID },
+      success: function (data) {
+        $("#paymentDetailsMessage").fadeIn();
+        $("#paymentDetailsMessage").html(data);
+      },
+    });
+  }
+}
+
+// Function to delete receipt from db
+function deleterReceipt() {
+  // Get the receiptID entered by the user
+  var receiptDetailsReceiptID = $("#receiptDetailsReceiptID").val();
+
+  // Call the deleteReceipt.php script only if there is a value in the
+  // item number textbox
+  if (receiptDetailsReceiptID != "") {
+    $.ajax({
+      url: "model/receipt/deleteReceipt.php",
+      method: "POST",
+      data: { receiptDetailsReceiptID: receiptDetailsReceiptID },
+      success: function (data) {
+        $("#receiptDetailsMessage").fadeIn();
+        $("#receiptDetailsMessage").html(data);
       },
     });
   }
@@ -2200,6 +2430,11 @@ function getSaleDetailsToPopulate() {
       $("#saleDetailsDiscount").val(data.discount);
       $("#saleDetailsQuantity").val(data.quantity);
       $("#saleDetailsUnitPrice").val(data.unitPrice);
+      $("#saleDetailsBatchNumber").val(data.batchNumber);
+      $("#saleDetailsExpiryDate").val(data.expiryDate);
+      $("#saleDetailsMRP").val(data.MRP);
+      $("#saleDetailsGST").val(data.GST);
+      $("#saleDetailsBillNumber").val(data.billNumber);
     },
     complete: function () {
       calculateTotalInSaleTab();
@@ -2457,6 +2692,70 @@ function updatePurchase() {
   });
 }
 
+// Function to call the updatePayment.php script to update payment data to db
+function updatePayment() {
+  var paymentDetailsVendorName = $("#paymentDetailsVendorName").val();
+  var paymentDetailsPaymentDate = $("#paymentDetailsPaymentDate").val();
+  var paymentDetailsPaymentID = $("#paymentDetailsPaymentID").val();
+  var paymentDetailsInvoiceNumber = $("#paymentDetailsInvoiceNumber").val();
+  var paymentDetailsPaymentStatus = $("#paymentDetailsPaymentStatus").val();
+  var paymentDetailsPaidAmount = $("#paymentDetailsPaidAmount").val();
+  var paymentDetailsModeofPayment = $("#paymentDetailsModeofPayment").val();
+  var paymentDetailsDescription = $("#paymentDetailsDescription").val();
+  console.log("up");
+  $.ajax({
+    url: "model/payment/updatePayment.php",
+    method: "POST",
+    data: {
+      paymentDetailsVendorName: paymentDetailsVendorName,
+      paymentDetailsPaymentDate: paymentDetailsPaymentDate,
+      paymentDetailsPaymentID: paymentDetailsPaymentID,
+      paymentDetailsInvoiceNumber: paymentDetailsInvoiceNumber,
+      paymentDetailsPaymentStatus: paymentDetailsPaymentStatus,
+      paymentDetailsPaidAmount: paymentDetailsPaidAmount,
+      paymentDetailsModeofPayment: paymentDetailsModeofPayment,
+      paymentDetailsDescription: paymentDetailsDescription,
+    },
+    success: function (data) {
+      $("#paymentDetailsMessage").fadeIn();
+      $("#paymentDetailsMessage").html(data);
+    },
+
+  });
+}
+
+// Function to call the updateReceipt.php script to update receipt data to db
+function updateReceipt() {
+  var receiptDetailsCustomerName = $("#receiptDetailsCustomerName").val();
+  var receiptDetailsReceiptDate = $("#receiptDetailsReceiptDate").val();
+  var receiptDetailsReceiptID = $("#receiptDetailsReceiptID").val();
+  var receiptDetailsBillNumber = $("#receiptDetailsBillNumber").val();
+  var receiptDetailsPaymentStatus = $("#receiptDetailsPaymentStatus").val();
+  var receiptDetailsPaidAmount = $("#receiptDetailsPaidAmount").val();
+  var receiptDetailsModeofPayment = $("#receiptDetailsModeofPayment").val();
+  var receiptDetailsDescription = $("#receiptDetailsDescription").val();
+  console.log("up");
+  $.ajax({
+    url: "model/receipt/updateReceipt.php",
+    method: "POST",
+    data: {
+      receiptDetailsCustomerName: receiptDetailsCustomerName,
+      receiptDetailsReceiptDate: receiptDetailsReceiptDate,
+      receiptDetailsReceiptID: receiptDetailsReceiptID,
+      receiptDetailsBillNumber: receiptDetailsBillNumber,
+      receiptDetailsPaymentStatus: receiptDetailsPaymentStatus,
+      receiptDetailsPaidAmount: receiptDetailsPaidAmount,
+      receiptDetailsModeofPayment: receiptDetailsModeofPayment,
+      receiptDetailsDescription: receiptDetailsDescription,
+    },
+    success: function (data) {
+      $("#receiptDetailsMessage").fadeIn();
+      $("#receiptDetailsMessage").html(data);
+    },
+
+  });
+}
+
 // Function to call the updateSale.php script to update sale data to db
 function updateSale() {
   var saleDetailsItemNumber = $("#saleDetailsItemNumber").val();
@@ -2468,6 +2767,11 @@ function updateSale() {
   var saleDetailsCustomerName = $("#saleDetailsCustomerName").val();
   var saleDetailsDiscount = $("#saleDetailsDiscount").val();
   var saleDetailsCustomerID = $("#saleDetailsCustomerID").val();
+  var saleDetailsBatchNumber = $("#saleDetailsBatchNumber").val();
+  var saleDetailsExpiryDate = $("#saleDetailsExpiryDate").val();
+  var saleDetailsMRP = $("#saleDetailsMRP").val();
+  var saleDetailsGST = $("#saleDetailsGST").val();
+  var saleDetailsBillNumber = $("#saleDetailsBillNumber").val();
 
   $.ajax({
     url: "model/sale/updateSale.php",
@@ -2482,6 +2786,11 @@ function updateSale() {
       saleDetailsCustomerName: saleDetailsCustomerName,
       saleDetailsDiscount: saleDetailsDiscount,
       saleDetailsCustomerID: saleDetailsCustomerID,
+      saleDetailsBatchNumber: saleDetailsBatchNumber,
+      saleDetailsExpiryDate: saleDetailsExpiryDate,
+      saleDetailsMRP: saleDetailsMRP,
+      saleDetailsGST: saleDetailsGST,
+      saleDetailsBillNumber: saleDetailsBillNumber,
     },
     success: function (data) {
       $("#saleDetailsMessage").fadeIn();

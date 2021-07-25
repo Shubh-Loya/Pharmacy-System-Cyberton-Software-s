@@ -138,7 +138,7 @@
       <a href="receipts.php" class="list-group-item list-group-item-action bg-light"><i class="fas fa-rupee-sign"></i> Payments & Receipts</a>
       <a href="ourvendors.php" class="list-group-item list-group-item-action bg-light"><i class="fa fa-database"></i> Vendor Information</a>
       <a href="customerswithus.php" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users"></i> Customer Information</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-edit"></i> Tax Handling</a>
+      
   </ul>
 
 </div>
@@ -147,7 +147,7 @@
 <div class="col-lg-6">
 
 
-  <div class="card">
+  <div class="card" style="height: 294px; overflow:hidden;">
       <div class="card-header text-white datPinkColor" style="font-family: Open Sans;">
       Monthly Updates
       </div>

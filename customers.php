@@ -21,21 +21,23 @@
 				  <!-- Div to show the ajax message from validations/db submission -->
 				  <div id="customerDetailsMessage"></div>
 					 <form> 
-					  <div class="form-row">
-						<div class="form-group col-md-6">
+					   <div class="form-row">
+						<div class="form-group col-md-4">
 						  <label for="customerDetailsCustomerFullName">Full Name<span class="requiredIcon">*</span></label>
 						  <input type="text" class="form-control" id="customerDetailsCustomerFullName" name="customerDetailsCustomerFullName">
 						</div>
-						<div class="form-group col-md-2">
-							<label for="customerDetailsStatus">Status</label>
-							<select id="customerDetailsStatus" name="customerDetailsStatus" class="form-control chosenSelect">
-								<?php include('inc/statusList.html'); ?>
-							</select>
-						</div>
-						 <div class="form-group col-md-3">
+						 <div class="form-group col-md-2">
 							<label for="customerDetailsCustomerID">Customer ID</label>
 							<input type="text" class="form-control invTooltip" id="customerDetailsCustomerID" name="customerDetailsCustomerID" title="This will be auto-generated when you add a new customer" autocomplete="off">
 							<div id="customerDetailsCustomerIDSuggestionsDiv" class="customListDivWidth"></div>
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="customerDetailsDrugLicenseNumber">Drug License Number</label>
+						  <input type="text" class="form-control" id="customerDetailsDrugLicenseNumber" name="customerDetailsDrugLicenseNumber" autocomplete="off">
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="customerDetailsGSTRNumber">GSTR Number</label>
+						  <input type="text" class="form-control" id="customerDetailsGSTRNumber" name="customerDetailsGSTRNumber" autocomplete="off">
 						</div>
 					  </div>
 					  <div class="form-row">
@@ -47,9 +49,15 @@
 							<label for="customerDetailsCustomerPhone2">Phone 2</label>
 							<input type="text" class="form-control invTooltip" id="customerDetailsCustomerPhone2" name="customerDetailsCustomerPhone2" title="Do not enter leading 0">
 						  </div>
-						  <div class="form-group col-md-6">
+						  <div class="form-group col-md-4">
 							<label for="customerDetailsCustomerEmail">Email</label>
 							<input type="email" class="form-control" id="customerDetailsCustomerEmail" name="customerDetailsCustomerEmail">
+						</div>
+						<div class="form-group col-md-2">
+							<label for="customerDetailsStatus">Status</label>
+							<select id="customerDetailsStatus" name="customerDetailsStatus" class="form-control chosenSelect">
+								<?php include('inc/statusList.html'); ?>
+							</select>
 						</div>
 					  </div>
 					  <div class="form-group">

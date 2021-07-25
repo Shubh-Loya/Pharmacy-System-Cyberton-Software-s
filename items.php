@@ -64,7 +64,7 @@
 								  <!-- <label for="itemDetailsDescription">Description</label> -->
 								  <textarea rows="4" class="form-control" placeholder="Description" name="itemDetailsDescription" id="itemDetailsDescription"></textarea>
 								</div>  
-							  <div class="form-group col-md-2">
+							  <div class="form-group col-md-3">
 									<label for="itemDetailsCategory">Category<span class="requiredIcon">*</span></label>
 									<select id="itemDetailsCategory" name="itemDetailsCategory" class="form-control chosenSelect">
 										<?php include('inc/categoryList.html'); ?>
@@ -72,17 +72,21 @@
 								  </div>
 							  </div>
 							  <div class="form-row">
-								<div class="form-group col-md-3">
-								  <label for="itemDetailsDiscount">Discount %</label>
-								  <input type="text" class="form-control" value="0" name="itemDetailsDiscount" id="itemDetailsDiscount">
-								</div>
-								<div class="form-group col-md-3">
+							    <div class="form-group col-md-2">
 								  <label for="itemDetailsQuantity">Quantity<span class="requiredIcon">*</span></label>
 								  <input type="number" class="form-control" value="0" name="itemDetailsQuantity" id="itemDetailsQuantity">
 								</div>
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-2">
+								   <label for="itemDetailsMRP">MRP<span class="requiredIcon">*</span></label>
+								   <input type="text" class="form-control" id="itemDetailsMRP" name="itemDetailsMRP" value="0">
+								</div>
+								<div class="form-group col-md-2">
 								  <label for="itemDetailsUnitPrice">Unit Price<span class="requiredIcon">*</span></label>
 								  <input type="text" class="form-control" value="0" name="itemDetailsUnitPrice" id="itemDetailsUnitPrice">
+								</div>
+								<div class="form-group col-md-2">
+						  		  <label for="itemDetailsGST">GST %<span class="requiredIcon">*</span></label>
+						 		  <input type="number" class="form-control" id="itemDetailsGST" name="itemDetailsGST" value="0">
 								</div>
 								<div class="form-group col-md-3">
 								  <label for="itemDetailsTotalStock">Total Stock</label>

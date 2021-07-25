@@ -21,7 +21,7 @@
 				  <!-- Div to show the ajax message from validations/db submission -->
 				  <div id="vendorDetailsMessage"></div>
 					 <form> 
-					  <div class="form-row">
+<div class="form-row">
 						<div class="form-group col-md-6">
 						  <label for="vendorDetailsVendorFullName">Full Name<span class="requiredIcon">*</span></label>
 						  <input type="text" class="form-control" id="vendorDetailsVendorFullName" name="vendorDetailsVendorFullName" placeholder="">
@@ -38,7 +38,7 @@
 							<div id="vendorDetailsVendorIDSuggestionsDiv" class="customListDivWidth"></div>
 						</div>
 					  </div>
-<div class="form-row">
+					  <div class="form-row">
 						  <div class="form-group col-md-3">
 							<label for="vendorDetailsVendorMobile">Phone (mobile)<span class="requiredIcon">*</span></label>
 							<input type="text" class="form-control invTooltip" id="vendorDetailsVendorMobile" name="vendorDetailsVendorMobile" title="Do not enter leading 0">

@@ -169,7 +169,7 @@
 						</div>
 						<div class="form-group col-md-3">
 						  <label for="purchaseDetailsPurchaseDate">Purchase Date<span class="requiredIcon">*</span></label>
-						  <input type="text" class="form-control datepicker" id="purchaseDetailsPurchaseDate" name="purchaseDetailsPurchaseDate" readonly value="<?php echo date('Y-m-d');?>">
+						  <input type="text" class="form-control datepicker" id="purchaseDetailsPurchaseDate" name="purchaseDetailsPurchaseDate" value="<?php echo date('Y-m-d');?>">
 						</div>
 						<div class="form-group col-md-2">
 						  <label for="purchaseDetailsPurchaseID">Purchase ID</label>
@@ -348,15 +348,20 @@
 					<div id="saleDetailsMessage"></div>
 					<form>
 					  <div class="form-row">
-						<div class="form-group col-md-5">
+						<div class="form-group col-md-4">
 						  <label for="saleDetailsCustomerName">Customer Name<span class="requiredIcon">*</span></label>
 						  <input type="text" class="form-control" id="saleDetailsCustomerName" name="saleDetailsCustomerName">
 						  <div id="saleDetailsCustomerNameSuggestionsDiv" class="customListDivWidth"></div>
 						</div>
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-2">
 							<label for="saleDetailsCustomerID">Customer ID<span class="requiredIcon">*</span></label>
 							<input type="text" class="form-control" id="saleDetailsCustomerID" name="saleDetailsCustomerID" autocomplete="off">
 							<div id="saleDetailsCustomerIDSuggestionsDiv" class="customListDivWidth"></div>
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="saleDetailsSaleID">Bill Number<span class="requiredIcon">*</span></label>
+						  <input type="text" class="form-control invTooltip" id="saleDetailsBillNumber" name="saleDetailsBillNumber" title="This will be auto-generated when you add a new record" autocomplete="off">
+						  <div id="saleDetailsBillNumberSuggestionsDiv" class="customListDivWidth"></div>
 						</div>
 						<div class="form-group col-md-2">
 						  <label for="saleDetailsSaleID">Sale ID</label>
@@ -383,7 +388,7 @@
 						</div>
 						  <div class="form-group col-md-3">
 							  <label for="saleDetailsSaleDate">Sale Date<span class="requiredIcon">*</span></label>
-							  <input type="text" class="form-control datepicker" id="saleDetailsSaleDate" value="<?php echo date('Y-m-d');?>" name="saleDetailsSaleDate" readonly>
+							  <input type="text" class="form-control datepicker" id="saleDetailsSaleDate" value="<?php echo date('Y-m-d');?>" name="saleDetailsSaleDate">
 						  </div>
 					  </div>
 					  <div class="form-row">

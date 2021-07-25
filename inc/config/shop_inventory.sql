@@ -165,6 +165,7 @@ INSERT INTO `purchase` (`purchaseID`, `invoiceNumber`, `itemNumber`, `purchaseDa
 --
 
 CREATE TABLE `sale` (
+  `billNumber` varchar(255) NOT NULL,
   `saleID` int(11) NOT NULL,
   `itemNumber` varchar(255) NOT NULL,
   `customerID` int(11) NOT NULL,
@@ -185,16 +186,70 @@ CREATE TABLE `sale` (
 -- Dumping data for table `sale`
 --
 
-INSERT INTO `sale` (`saleID`, `itemNumber`, `customerID`, `customerName`, `itemName`, `batchNumber`, `expiryDate`, `MRP`, `saleDate`, `discount`, `quantity`, `GST`, `unitPrice`, `totalPrice`) VALUES
-(18, '1', 14, 'Steve Jobs', 'Combiflam Tablet', 'ADEF1548', '2024-03-27', 70, '2021-02-01', 1, 50, 12, 50, 2680),
-(19, '2', 18, 'Asitha Silva', 'Zeet Expectorant', 'HXSJ6456', '2024-03-27', 120, '2021-02-01', 2, 10, 8, 85, 970),
-(20, '3', 41, 'Mark Taylor', 'Procal Powder', 'RETS8753', '2024-03-27', 250, '2021-02-01', 3, 5, 8, 185, 655),
-(21, '4', 24, 'Sunil Perera', 'Fabiflu 200 Tablet', 'QBHI1597', '2024-03-19', 2000, '2021-03-20', 1, 7, 12, 1400, 10850),
-(22, '5', 25, 'Theresa May', 'Nupenta DSR Capsule', 'WERS7543', '2024-03-19', 85, '2021-03-20', 2, 10, 8, 55, 640),
-(23, '6', 42, 'Nelson Mandela', 'Crocin Tablet', 'YVBM5684', '2024-03-19', 50, '2021-03-20', 2, 60, 12, 35, 2300),
-(24, '7', 39, 'Amal Silverton', 'T-bact 5g Ointment', 'TSGJ4236', '2024-03-19', 105, '2021-03-20', 2, 6, 12, 75, 590),
-(25, '8', 38, 'Nuwan Perara', 'Mosi Eye Drop', 'REGH4587', '2024-01-31', 98, '2021-03-28', 2, 5, 12, 65, 368),
-(26, '9', 26, 'Sachin Tendulkar', 'Valparin 200 Tablet', 'TVCZ8239', '2024-01-31', 138, '2021-03-28', 2, 5, 8, 90, 490);
+INSERT INTO `sale` (`billNumber`, `saleID`, `itemNumber`, `customerID`, `customerName`, `itemName`, `batchNumber`, `expiryDate`, `MRP`, `saleDate`, `discount`, `quantity`, `GST`, `unitPrice`, `totalPrice`) VALUES
+('XYZ0000001', 18, '1', 14, 'Steve Jobs', 'Combiflam Tablet', 'ADEF1548', '2024-03-27', 70, '2021-02-01', 1, 50, 12, 50, 2680),
+('XYZ0000002', 19, '2', 18, 'Asitha Silva', 'Zeet Expectorant', 'HXSJ6456', '2024-03-27', 120, '2021-02-01', 2, 10, 8, 85, 970),
+('XYZ0000003', 20, '3', 41, 'Mark Taylor', 'Procal Powder', 'RETS8753', '2024-03-27', 250, '2021-02-01', 3, 5, 8, 185, 655),
+('XYZ0000004', 21, '4', 24, 'Sunil Perera', 'Fabiflu 200 Tablet', 'QBHI1597', '2024-03-19', 2000, '2021-03-20', 1, 7, 12, 1400, 10850),
+('XYZ0000005', 22, '5', 25, 'Theresa May', 'Nupenta DSR Capsule', 'WERS7543', '2024-03-19', 85, '2021-03-20', 2, 10, 8, 55, 640),
+('XYZ0000006', 23, '6', 42, 'Nelson Mandela', 'Crocin Tablet', 'YVBM5684', '2024-03-19', 50, '2021-03-20', 2, 60, 12, 35, 2300),
+('XYZ0000007', 24, '7', 39, 'Amal Silverton', 'T-bact 5g Ointment', 'TSGJ4236', '2024-03-19', 105, '2021-03-20', 2, 6, 12, 75, 590),
+('XYZ0000008', 25, '8', 38, 'Nuwan Perara', 'Mosi Eye Drop', 'REGH4587', '2024-01-31', 98, '2021-03-28', 2, 5, 12, 65, 368),
+('XYZ0000009', 26, '9', 26, 'Sachin Tendulkar', 'Valparin 200 Tablet', 'TVCZ8239', '2024-01-31', 138, '2021-03-28', 2, 5, 8, 90, 490);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+`vendorName` varchar(255) NOT NULL DEFAULT 'Test Vendor',
+`vendorID` int(11) NOT NULL DEFAULT 0,
+`paymentDate` date NOT NULL,
+`paymentID` int(11) NOT NULL,
+`invoiceNumber` varchar(255) NOT NULL,
+`paymentStatus` varchar(255) NOT NULL DEFAULT 'Not Defined',
+`paidAmount` float NOT NULL DEFAULT 0,
+`paymentMode` varchar(255) NOT NULL DEFAULT 'Not Defined',
+`description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`vendorName`, `vendorID`, `paymentDate`, `paymentID`, `invoiceNumber`, `paymentStatus`, `paidAmount`, `paymentMode`, `description`) VALUES
+('Sanofi', 1, '2021-03-28', 00000001, 'ABC111', 'Full Payment', 3000, 'Cash', ''),
+('Glenmark', 2, '2021-03-28', 00000002, 'ABC114', 'Full Payment', 38000, 'Cheque', 'Axis Bank'),
+('Glaxo SmithKline', 3, '2021-03-28', 00000003,'ABC113', 'Full Payment', 2250, 'UPI', 'Google Pay');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `receipts`
+--
+
+CREATE TABLE `receipts` (
+`customerName` varchar(255) NOT NULL DEFAULT 'Test Customer',
+`customerID` int(11) NOT NULL DEFAULT 0,
+`receiptDate` date NOT NULL,
+`receiptID` int(11) NOT NULL,
+`billNumber` varchar(255) NOT NULL,
+`paymentStatus` varchar(255) NOT NULL DEFAULT 'Not Defined',
+`paidAmount` float NOT NULL DEFAULT 0,
+`paymentMode` varchar(255) NOT NULL DEFAULT 'Not Defined',
+`description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `receipts`
+--
+
+INSERT INTO `receipts` (`customerName`, `customerID`, `receiptDate`, `receiptID`, `billNumber`, `paymentStatus`, `paidAmount`, `paymentMode`, `description`) VALUES
+('Steve Jobs', 14, '2021-03-28', 00000001, 'XYZ0000001', 'Full Payment', 2680, 'Cash', ''),
+('Sunil Perera', 24, '2021-03-28', 00000002, 'XYZ0000004', 'Full Payment', 10850, 'Cheque', 'Canara Bank'),
+('Nelson Mandela', 42, '2021-03-28', 00000003, 'XYZ0000006', 'Full Payment', 2300, 'UPI', 'Phone Pe');
 
 -- --------------------------------------------------------
 
@@ -250,6 +305,9 @@ INSERT INTO `vendor` (`vendorID`, `fullName`, `email`, `mobile`, `phone2`, `addr
 (6, 'Ranbaxy', 'shubham@ranbaxy.com', 1111, 0, 'Sea Road, Bambalapitiya', '', '', 'Colombo', 'Active', '2021-03-28 10:36:54'),
 (7, 'FDC', 'shubham@fdc.com', 191938930, 0, '123, A Road, B avenue, ', 'Gilford Crescent', 'Colpetty', 'Colombo', 'Active', '2021-03-28 12:36:53');
 
+-- --------------------------------------------------------
+
+
 --
 -- Indexes for dumped tables
 --
@@ -283,6 +341,18 @@ ALTER TABLE `purchase`
 --
 ALTER TABLE `sale`
   ADD PRIMARY KEY (`saleID`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`paymentID`);
+
+--
+-- Indexes for table `receipts`
+--
+ALTER TABLE `receipts`
+  ADD PRIMARY KEY (`receiptID`);
 
 --
 -- Indexes for table `user`
@@ -329,6 +399,18 @@ ALTER TABLE `purchase`
 --
 ALTER TABLE `sale`
   MODIFY `saleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `paymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=00000003;
+
+--
+-- AUTO_INCREMENT for table `receipts`
+--
+ALTER TABLE `receipts`
+  MODIFY `receiptID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=00000003;
 
 --
 -- AUTO_INCREMENT for table `user`

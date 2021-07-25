@@ -11,6 +11,7 @@
 		$unitPrice = htmlentities($_POST['saleDetailsUnitPrice']);
 		$customerID = htmlentities($_POST['saleDetailsCustomerID']);
 		$customerName = htmlentities($_POST['saleDetailsCustomerName']);
+		$billNumber = htmlentities($_POST['saleDetailsBillNumber']);
 		$saleDate = htmlentities($_POST['saleDetailsSaleDate']);
 		$batchNumber = htmlentities($_POST['saleDetailsBatchNumber']);
 		$expiryDate = htmlentities($_POST['saleDetailsExpiryDate']);
@@ -19,7 +20,7 @@
 		$totalPrice = htmlentities($_POST['saleDetailsTotal']);
 		
 		// Check if mandatory fields are not empty
-		if(!empty($itemNumber) && isset($customerID) && isset($saleDate) && isset($quantity) && isset($unitPrice) && isset($batchNumber) && isset($expiryDate) && isset($MRP) && isset($GST) && isset($totalPrice)){
+		if(!empty($itemNumber) && isset($customerID) && isset($billNumber) && isset($saleDate) && isset($quantity) && isset($unitPrice) && isset($batchNumber) && isset($expiryDate) && isset($MRP) && isset($GST) && isset($totalPrice)){
 						
 			// Check if itemNumber is empty
 			if($itemNumber == ''){ 
@@ -27,6 +28,12 @@
 				exit();
 			}
 			
+			// Check if bill number is empty
+			if($billNumber == ''){ 
+				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter Bill Number.</div>';
+				exit();
+			}
+
 			// Check if unit price is empty
 			if($unitPrice == ''){ 
 				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter Unit Price.</div>';
@@ -135,9 +142,9 @@
 						$customerName = $customerRow['fullName'];
 						
 						// INSERT data to sale table
-						$insertSaleSql = 'INSERT INTO sale(itemNumber, itemName, discount, quantity, unitPrice, customerID, customerName, saleDate, batchNumber, expiryDate, MRP, GST, totalPrice) VALUES(:itemNumber, :itemName, :discount, :quantity, :unitPrice, :customerID, :customerName, :saleDate, :batchNumber, :expiryDate, :MRP, :GST, :totalPrice)';
+						$insertSaleSql = 'INSERT INTO sale(billNumber, itemNumber, itemName, discount, quantity, unitPrice, customerID, customerName, saleDate, batchNumber, expiryDate, MRP, GST, totalPrice) VALUES(:billNumber, :itemNumber, :itemName, :discount, :quantity, :unitPrice, :customerID, :customerName, :saleDate, :batchNumber, :expiryDate, :MRP, :GST, :totalPrice)';
 						$insertSaleStatement = $conn->prepare($insertSaleSql);
-						$insertSaleStatement->execute(['itemNumber' => $itemNumber, 'itemName' => $itemName, 'discount' => $discount, 'quantity' => $quantity, 'unitPrice' => $unitPrice, 'customerID' => $customerID, 'customerName' => $customerName, 'saleDate' => $saleDate, 'batchNumber' => $batchNumber, 'expiryDate' => $expiryDate, 'MRP' => $MRP, 'GST' => $GST, 'totalPrice' => $totalPrice]);
+						$insertSaleStatement->execute(['billNumber' => $billNumber, 'itemNumber' => $itemNumber, 'itemName' => $itemName, 'discount' => $discount, 'quantity' => $quantity, 'unitPrice' => $unitPrice, 'customerID' => $customerID, 'customerName' => $customerName, 'saleDate' => $saleDate, 'batchNumber' => $batchNumber, 'expiryDate' => $expiryDate, 'MRP' => $MRP, 'GST' => $GST, 'totalPrice' => $totalPrice]);
 						
 						// UPDATE the stock in item table
 						$stockUpdateSql = 'UPDATE item SET stock = :stock WHERE itemNumber = :itemNumber';
